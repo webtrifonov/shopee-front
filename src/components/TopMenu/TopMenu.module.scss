@@ -1,0 +1,24 @@
+.topMenu {
+  margin: 0 -15px;
+  padding: 10px 0;
+  & ul {
+    display: flex;
+    flex-wrap: wrap;
+    & > li {
+      padding: 0px 10px;
+      font-size: 18px;
+      & > a {
+        padding: 10px 20px 5px;
+        text-decoration: none;
+        color: #fafafa;
+        &:hover {
+          border-bottom: 1px solid #fafafa;
+        }
+        &:active {
+          color: darken(#fafafa, 25%);
+          border-bottom: 1px solid darken(#fafafa, 25%);
+        }
+      }
+    }
+  }
+}

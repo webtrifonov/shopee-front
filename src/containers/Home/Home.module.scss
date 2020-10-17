@@ -1,0 +1,41 @@
+.mainContainer {
+  display: grid;
+  grid-template-areas:
+    'breadcrumbs breadcrumbs'
+    'meta meta'
+    'statusBar statusBar'
+    'filters products'
+  ;
+  grid-template-columns: 4fr 8fr;
+  grid-column-gap: 25px;
+}
+
+.statusBar {
+  grid-area: statusBar;
+  padding: 16px 15px;
+  border-radius: 9px;
+  display: grid;
+  margin-top: 20px;
+  grid-template-columns: 1fr auto auto;
+}
+.statusBarTitle {
+  font-size: 18px;
+  color: #fafafa;
+  margin-right: 5px
+}
+.statusBarIcon {
+  margin-left: 5px;
+}
+.view, .sorting {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  margin-left: 20px;
+  align-items: center;
+}
+.filters {
+  grid-area: filters;
+  padding: 0 15px;
+}
+.products {
+  grid-area: products;
+}

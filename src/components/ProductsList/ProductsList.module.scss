@@ -1,0 +1,9 @@
+.productsList {
+  grid-area: products;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-column-gap: 15px;
+}
+.productsListGrid {
+  grid-template-columns: 1fr 1fr;
+}

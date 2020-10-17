@@ -1,0 +1,11 @@
+.filters {
+  grid-area: filters;
+  margin-top: 10px;
+  border-radius: 9px;
+  & > *:first-child {
+    border-top: none;
+  }
+}
+.details {
+  padding: 15px 15px 20px;
+}

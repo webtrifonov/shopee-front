@@ -1,0 +1,28 @@
+$duration: .5s;
+.summary {
+  display: flex;
+  padding: 15px 15px 20px;
+  border-top: 1px solid #fafafa;
+  border-bottom: 1px solid #fafafa;
+}
+.summaryText {
+  flex: 1;
+  color: #fafafa;
+}
+.toggleButton {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: -15px -15px -20px;
+  transition: transform $duration ease;
+  &Opened {
+    transform: rotate(-180deg);
+  }
+}
+.details {
+  box-sizing: content-box;
+  overflow-y: hidden;
+  transition: max-height $duration ease;
+}
