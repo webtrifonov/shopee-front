@@ -1,11 +1,9 @@
-import {CHANGE_ORDER_STATUS, CHANGE_VIEW_STATUS, FETCH} from '../actions/actionTypes';
+import {CHANGE_FILTERS, CHANGE_VIEW_STATUS, FETCH} from '../actions/actionTypes';
 import {reducerGenerator} from '../../utils/store';
 
 
 const HANDLERS = {
-  [FETCH.PRODUCTS.START]: (state, payload) => {
-    console.log('payload = ', payload);
-
+  [FETCH.PRODUCTS.START]: (state) => {
     return {
       ...state,
       loadingProducts: true,
@@ -50,7 +48,7 @@ const HANDLERS = {
       viewStatus: payload,
     }
   },
-  [CHANGE_ORDER_STATUS]: (state, payload) => {
+  [CHANGE_FILTERS]: (state, payload) => {
     return {
       ...state,
       filters: {
@@ -61,14 +59,16 @@ const HANDLERS = {
   },
 }
 const initialState = {
-  products: null,
+  products: [],
   categories: null,
   loadingProducts: false,
   errorProducts: '',
   errorCategories: '',
   viewStatus: 'list',
   filters: {
-    order: 'ASC'
+    order: 'ASC',
+    exists: 'all',
+    categories: [],
   }
 };
 export default reducerGenerator(initialState, HANDLERS);

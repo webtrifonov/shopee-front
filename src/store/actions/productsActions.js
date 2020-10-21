@@ -1,4 +1,4 @@
-import {CHANGE_ORDER_STATUS, CHANGE_VIEW_STATUS, FETCH} from './actionTypes';
+import {CHANGE_FILTERS, CHANGE_VIEW_STATUS, FETCH} from './actionTypes';
 
 export function fetchProductsStart(filters) {
 
@@ -42,10 +42,10 @@ export const changeViewStatus = (view) => {
     payload: view
   }
 }
-export const changeOrderStatus = (order) => {
+export const changeFilters = (filters) => {
   return {
-    type: CHANGE_ORDER_STATUS,
-    payload: order
+    type: CHANGE_FILTERS,
+    payload: filters
   }
 }
 

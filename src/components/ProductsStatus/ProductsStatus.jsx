@@ -3,21 +3,20 @@ import s from '../../containers/Home/Home.module.scss';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faSortAmountDown, faSortAmountUp, faThLarge, faThList} from '@fortawesome/free-solid-svg-icons';
 import {useDispatch} from 'react-redux';
-import {changeOrderStatus, changeViewStatus} from '../../store/actions/productsActions';
+import {changeFilters, changeViewStatus} from '../../store/actions/productsActions';
 
-const ProductsStatus = ({viewStatus, filters}) => {
+const ProductsStatus = ({count, viewStatus, filters}) => {
   const dispatch = useDispatch();
   const changeView = (status) => {
     dispatch(changeViewStatus(status));
   }
-  console.log('filters.order = ', filters.order);
 
   const changeOrder = (order) => {
-    dispatch(changeOrderStatus({order}));
+    dispatch(changeFilters({order}));
   }
   return (
     <div className={`${s.statusBar} bg-black`}>
-      <div className={s.statusBarTitle}>170 products</div>
+      <div className={s.statusBarTitle}>{count} products</div>
       <div className={s.view}>
 
         <div className={s.statusBarTitle}>View</div>

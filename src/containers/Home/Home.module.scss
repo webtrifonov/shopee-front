@@ -36,6 +36,10 @@
   grid-area: filters;
   padding: 0 15px;
 }
-.products {
+.products, .noProducts {
   grid-area: products;
+}
+.noProducts {
+  margin-top: 10px;
+  color: #fafafa;
 }

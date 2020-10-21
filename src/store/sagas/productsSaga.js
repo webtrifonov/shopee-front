@@ -27,12 +27,15 @@ const HANDLERS = {
   * [FETCH.PRODUCTS.START]({payload}) {
 
     try {
+      const params = {...payload};
+      if (params.categories) {
+        params.categories = JSON.stringify(params.categories);
+      }
+
       const response = yield call(axios, {
         method: 'GET',
         url: `/products`,
-        params: {
-          order: payload.order,
-        },
+        params: params,
       });
       if (response.data?.success) {
         const products = response.data.products;

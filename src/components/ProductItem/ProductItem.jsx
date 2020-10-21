@@ -3,13 +3,12 @@ import s from './ProductItem.module.scss';
 import Button from '../Button/Button';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faDollarSign, faShoppingCart} from '@fortawesome/free-solid-svg-icons';
-import {useSelector} from 'react-redux';
 
-const ProductItem = ({item: {image, title, description, price}, viewStatus}) => {
+const ProductItem = ({item: {image, title, description, price, amount}, viewStatus}) => {
 
   return (
-    <div className={`${s.productItem} bg-black ${viewStatus === 'grid' && s.productItemGrid}`}>
-      <div className={s.image}>
+    <div className={`${s.productItem} bg-black`}>
+      <div className={`${s.image} ${amount === 0 && s.imageNodata}`}>
         <img src={image} alt="img" />
       </div>
       <div className={s.body}>

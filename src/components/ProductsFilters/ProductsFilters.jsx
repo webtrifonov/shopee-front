@@ -1,45 +1,155 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import s from './ProductsFilters.module.scss';
 import Accordion from '../Accordion/Accordion';
 import FilterItem from '../FilterItem/FilterItem';
+import Button from '../Button/Button';
+import {changeFilters} from '../../store/actions/productsActions';
+import {useDispatch, useSelector} from 'react-redux';
+import PriceSlider from '../PriceSlider/PriceSlider';
+import {DIGITAL_REG} from '../../utils/constants';
+import {priceFormat} from '../../utils/validation';
+import {getMaxPrice} from '../../utils/utils';
 
 const ProductsFilters = (props) => {
+  const dispatch = useDispatch();
   const {categories} = props;
 
+  let MAX_PRICE = getMaxPrice(categories);
+
+  const filters = useSelector((state) => state.productsReducer.filters);
+  const [filtersLocal, setFiltersLocal] = useState(filters);
+  useEffect(() => {
+    MAX_PRICE = getMaxPrice(categories);
+    setFiltersLocal({
+      ...filters,
+      maxPrice: MAX_PRICE,
+    });
+  }, [categories]);
+  const changeCategoriesHandler = (event) => {
+    const {name} = event.target;
+    let categories = filtersLocal?.categories ? filtersLocal.categories : [];
+
+    if (!categories.includes(name)) {
+      categories.push(name);
+    } else {
+      categories = categories.filter((item) => item !== name);
+    }
+    setFiltersLocal({
+      ...filtersLocal,
+      categories,
+    });
+  }
+  const changeExistsHandler = (event) => {
+    const {name, value} = event.target;
+    setFiltersLocal({
+      ...filtersLocal,
+     ...{[name]: value}
+    });
+  }
+  const changeMinPriceHandler = (event) => {
+    let {value} = event.target;
+    if (DIGITAL_REG.test(value)) {
+      value = priceFormat(value, MAX_PRICE);
+      setFiltersLocal({
+        ...filtersLocal,
+        minPrice: value
+      });
+    }
+  }
+  const changeMaxPriceHandler = (event) => {
+    let {value} = event.target;
+
+    if (DIGITAL_REG.test(value)) {
+      value = priceFormat(value, MAX_PRICE);
+      setFiltersLocal({
+        ...filtersLocal,
+        maxPrice: value
+      });
+    }
+  }
+  const applyFiltersHandler = () => {
+
+    dispatch(changeFilters(filtersLocal));
+  }
+
   return (
-    <div className={`${s.filters} bg-black`}>
+    <form className={`${s.filters} bg-black`}>
       <Accordion
         summary={'Category'}
         Details={() => (
-          <div className={s.details}>
+          <fieldset
+            className={s.details}
+            onChange={changeCategoriesHandler}
+          >
             {
               categories?.length
                 ? categories.map((item) => {
-                return <FilterItem key={item.id} title={item.title} />
+                  return (
+                    <FilterItem
+                      type="checkbox"
+                      name={item.id}
+                      key={item.id}
+                      title={item.title}
+                      checked={filtersLocal?.categories?.includes(item.id)}
+                    />
+                  )
               }) : null
             }
-          </div>
+          </fieldset>
         )}
       />
       <Accordion
         summary={'Existence'}
         Details={() => (
-          <div className={s.details}>
-            <FilterItem title={'yes'} />
-            <FilterItem title={'no'} />
-          </div>
+          <fieldset
+            className={s.details}
+            onChange={changeExistsHandler}
+          >
+            <FilterItem
+              title={'all'}
+              value={'all'}
+              name="exists"
+              defaultChecked={filtersLocal?.exists === 'all'}
+            />
+            <FilterItem
+              title={'yes'}
+              value={'yes'}
+              name="exists"
+              defaultChecked={filtersLocal?.exists === 'yes'}
+            />
+            <FilterItem
+              title={'no'}
+              value={'no'}
+              name="exists"
+              defaultChecked={filtersLocal?.exists === 'no'}
+            />
+          </fieldset>
         )}
       />
       <Accordion
         summary={'Price'}
         Details={() => (
           <div className={s.details}>
-            {/*<FilterItem title={'yes'} />*/}
-            {/*<FilterItem title={'no'} />*/}
+            <PriceSlider
+              minPrice={filtersLocal.minPrice}
+              maxPrice={filtersLocal.maxPrice}
+              MAX_PRICE={MAX_PRICE}
+              changeMinPriceHandler={changeMinPriceHandler}
+              changeMaxPriceHandler={changeMaxPriceHandler}
+            />
           </div>
         )}
       />
-    </div>
+      <div className={s.applyFilters}>
+        <Button
+          onClick={applyFiltersHandler}
+          className={s.applyFiltersButton}
+          color={'#DC4055'}
+        >
+          Apply filters
+        </Button>
+      </div>
+    </form>
   );
 };
 

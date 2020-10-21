@@ -8,4 +8,16 @@
 }
 .details {
   padding: 15px 15px 20px;
+  border: none;
+}
+.applyFilters {
+  display: flex;
+  justify-content: center;
+  margin: 15px;
+  &Button {
+    color: #fafafa;
+    &:active {
+      color: #333333;
+    }
+  }
 }

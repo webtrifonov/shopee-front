@@ -18,4 +18,4 @@ export const FETCH = {
 export const OPEN_MODAL = 'OPEN_MODAL';
 export const CLOSE_MODAL = 'CLOSE_MODAL';
 export const CHANGE_VIEW_STATUS = 'CHANGE_VIEW_STATUS';
-export const CHANGE_ORDER_STATUS = 'CHANGE_ORDER_STATUS';
+export const CHANGE_FILTERS = 'CHANGE_FILTERS';

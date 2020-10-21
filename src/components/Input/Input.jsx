@@ -2,8 +2,6 @@ import React from 'react';
 import s from './Input.module.scss';
 
 const Input = ({className, ...args}) => {
-  console.log('args = ', args);
-
   return (
     <div>
       <input
