@@ -14,17 +14,17 @@ const ProductsFilters = (props) => {
   const dispatch = useDispatch();
   const {categories} = props;
 
-  let MAX_PRICE = getMaxPrice(categories);
+  const MAX_PRICE = getMaxPrice(categories);
 
-  const filters = useSelector((state) => state.productsReducer.filters);
+  const {filters} = useSelector((state) => state.productsReducer);
   const [filtersLocal, setFiltersLocal] = useState(filters);
   useEffect(() => {
-    MAX_PRICE = getMaxPrice(categories);
+    const maxPrice = getMaxPrice(categories);
     setFiltersLocal({
       ...filters,
-      maxPrice: MAX_PRICE,
+      maxPrice,
     });
-  }, [categories]);
+  }, [categories, filters]);
   const changeCategoriesHandler = (event) => {
     const {name} = event.target;
     let categories = filtersLocal?.categories ? filtersLocal.categories : [];
@@ -67,13 +67,13 @@ const ProductsFilters = (props) => {
       });
     }
   }
-  const applyFiltersHandler = () => {
-
+  const applyFiltersHandler = (event) => {
+    event.preventDefault();
     dispatch(changeFilters(filtersLocal));
   }
 
   return (
-    <form className={`${s.filters} bg-black`}>
+    <form onSubmit={applyFiltersHandler} className={`${s.filters} bg-black`}>
       <Accordion
         summary={'Category'}
         Details={() => (
@@ -109,19 +109,19 @@ const ProductsFilters = (props) => {
               title={'all'}
               value={'all'}
               name="exists"
-              defaultChecked={filtersLocal?.exists === 'all'}
+              checked={filtersLocal?.exists === 'all'}
             />
             <FilterItem
               title={'yes'}
               value={'yes'}
               name="exists"
-              defaultChecked={filtersLocal?.exists === 'yes'}
+              checked={filtersLocal?.exists === 'yes'}
             />
             <FilterItem
               title={'no'}
               value={'no'}
               name="exists"
-              defaultChecked={filtersLocal?.exists === 'no'}
+              checked={filtersLocal?.exists === 'no'}
             />
           </fieldset>
         )}
@@ -142,7 +142,7 @@ const ProductsFilters = (props) => {
       />
       <div className={s.applyFilters}>
         <Button
-          onClick={applyFiltersHandler}
+          type="submit"
           className={s.applyFiltersButton}
           color={'#DC4055'}
         >

@@ -8,7 +8,6 @@ const Input = ({className, ...args}) => {
         type="text"
         className={`${s.input} ${className}`}
         {...args}
-
       />
     </div>
   );

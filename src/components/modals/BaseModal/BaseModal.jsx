@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './BaseModal.module.scss';
 import {useDispatch, useSelector} from 'react-redux';
-import {closeModal} from '../../store/actions/appActions';
+import {closeModal} from '../../../store/actions/appActions';
 
 const BaseModal = () => {
   const {modal, ModalContent} = useSelector((state) => state.appReducer);
@@ -10,10 +10,12 @@ const BaseModal = () => {
     event.preventDefault();
     dispatch(closeModal());
   }
-
+  if (modal) {
+    document.body.classList.add('overflow-hidden');
+  } else {
+    document.body.classList.remove('overflow-hidden');
+  }
   const renderContent = () => {
-
-
     if (ModalContent?.title) {
       const {title, message} = ModalContent;
       return (
@@ -24,7 +26,7 @@ const BaseModal = () => {
       );
     }
     if (ModalContent) {
-      return ModalContent;
+      return <ModalContent />;
     }
   }
   return modal ? (

@@ -1,8 +1,6 @@
 import React, {useState, useEffect, useRef} from 'react';
 import s from './Accordion.module.scss';
-import {
-  faAngleUp, faAngleDown
-} from '@fortawesome/free-solid-svg-icons'
+import {faAngleDown} from '@fortawesome/free-solid-svg-icons'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 const Accordion = ({summary, Details}) => {

@@ -1,66 +1,51 @@
-import React from 'react';
+import React, {memo} from 'react';
 import s from './Auth.module.scss';
 import cartIcon from '../../assets/images/cart.svg';
 import Button from '../Button/Button';
 import {Link} from 'react-router-dom';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {openModal} from '../../store/actions/appActions';
-import Title from '../Title/Title';
-import Input from '../Input/Input';
+import SignUpContent from '../modals/SignUpContent/SignUpContent';
+import SignInContent from '../modals/SignInContent/SignInContent';
+import {STORAGE_TOKEN} from '../../utils/constants';
+import {changeAuthToken, fetchAuthUserSuccess} from '../../store/actions/authActions';
 
-const Auth = (props) => {
+const Auth = () => {
   const dispatch = useDispatch();
+  const {authUser} = useSelector((state) => state.authReducer);
+  const isAuthenticated = !!authUser?.id;
+
   const openSignInModal = () => {
-    const Content = (
-      <div>
-        <form onSubmit={() => {}}>
-          <Title>Sign In</Title>
-          <Input
-            className={s.input}
-            name="email"
-            placeholder="E-mail"
-          />
-          <Input
-            className={s.input}
-            type="password"
-            name="password"
-            placeholder="Password"
-          />
-          <Button className={`${s.signIn} ${s.input}`}>Sign In</Button>
-        </form>
-      </div>
-    );
-    dispatch(openModal({Content}));
+    dispatch(openModal({Content: SignInContent}));
   }
   const openSignUpModal = () => {
-    const Content = (
-      <div className={`${s.authContent} bg-dark`}>
-        <form onSubmit={() => {}}>
-          <Title>Sign Up</Title>
-          <Input
-            className={s.input}
-            name="email"
-            placeholder="E-mail"
-          />
-          <Input
-            className={s.input}
-            type="password"
-            name="password"
-            placeholder="Password"
-          />
-          <Button className={`${s.signUp} ${s.input}`}>Sign Up</Button>
-        </form>
-      </div>
-    );
-    dispatch(openModal({Content}));
+    dispatch(openModal({Content: SignUpContent}));
   }
+  const logOut = () => {
+    localStorage.removeItem(STORAGE_TOKEN);
+    dispatch(changeAuthToken(null));
+    dispatch(fetchAuthUserSuccess({}));
+  }
+
   return (
     <div className={s.auth}>
-      <div className={s.authTitle}>Account</div>
+      <div className={s.authTitle}>{isAuthenticated ? `${authUser.email}` : `Account`}</div>
       <div className={s.authBar}>
         <div className={s.buttons}>
-          <Button onClick={openSignUpModal} className={s.signUp}>Sign Up</Button>
-          <Button onClick={openSignInModal} className={s.signIn}>Sign In</Button>
+          {!isAuthenticated &&
+            <Button
+              onClick={openSignUpModal}
+              className={s.signUp}
+            >
+             Sign Up
+            </Button>
+          }
+          <Button
+            onClick={isAuthenticated ? logOut : openSignInModal}
+            className={s.signIn}
+          >
+            {isAuthenticated ? 'Logout' : 'Sign In'}
+          </Button>
         </div>
       </div>
       <div className={s.cartButton}>
@@ -72,12 +57,16 @@ const Auth = (props) => {
           />
         </div>
       </div>
-      <div className={s.cartActions}>
-        <Link to={'/'}>Wish List</Link>
-        <Link to={'/'}>My Orders</Link>
-      </div>
+      {
+        isAuthenticated && (
+          <div className={s.cartActions}>
+            <Link to={'/wishlist'}>Wish List</Link>
+            <Link to={'/orders'}>My Orders</Link>
+          </div>
+        )
+      }
     </div>
   );
 };
 
-export default Auth;
+export default memo(Auth);

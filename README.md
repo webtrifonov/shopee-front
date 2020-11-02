@@ -1,4 +1,4 @@
-## Starter included
+## Shopee
 1.react
 
 2.redux

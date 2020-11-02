@@ -2,6 +2,7 @@ $searchHeight: 54px;
 
 .searchForm {
   padding: 10px 0 20px;
+  height: 56px;
 }
 .searchContainer {
   display: flex;
@@ -34,6 +35,12 @@ $searchHeight: 54px;
   align-items: center;
   border-radius: 0 ($searchHeight / 6)  ($searchHeight / 6) 0;
   position: relative;
+  appearance: none;
+  border: none;
+  outline: none;
+  &:active {
+    outline: none;
+  }
   &:before {
     content: '';
     position: absolute;

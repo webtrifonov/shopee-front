@@ -1,6 +1,5 @@
 import React from 'react';
 import s from './BaseLayout.module.scss';
-import { Link } from 'react-router-dom';
 import Header from '../../components/Header/Header';
 import Auth from '../../components/Auth/Auth';
 import Footer from '../../components/Footer/Footer';

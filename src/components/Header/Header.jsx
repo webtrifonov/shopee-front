@@ -5,9 +5,7 @@ import Logo from '../icons/Logo/Logo';
 import TopMenu from '../TopMenu/TopMenu';
 import SearchForm from '../SearchForm/SearchForm';
 
-const Header = (props) => {
-  const {children} = props;
-
+const Header = () => {
   return (
     <div className={s.header}>
       <div className={s.logo}>

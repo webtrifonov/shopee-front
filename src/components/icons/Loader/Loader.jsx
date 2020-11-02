@@ -8,7 +8,9 @@ const Loader = ({global}) => {
       <img className={s.loaderWrapper} src={LoaderIcon} alt="loader" />
     </div>
   ) : (
-    <img className={s.loaderWrapper} src={LoaderIcon} alt="loader" />
+    <div className={s.microContainer}>
+      <img className={s.loaderWrapper} src={LoaderIcon} alt="loader" />
+    </div>
   );
 };
 
