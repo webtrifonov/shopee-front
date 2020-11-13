@@ -1,13 +1,13 @@
-import React, {useEffect} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import {Redirect} from 'react-router';
-import {fetchOrdersStart} from '../../store/actions/userActions';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Redirect } from 'react-router';
+import { fetchOrdersStart } from '../../store/actions/userActions';
 import Title from '../../components/Title/Title';
 
 const Orders = () => {
   const dispatch = useDispatch();
-  const {orders} = useSelector((state) => state.userReducer);
-  const {authUser} = useSelector((state) => state.authReducer);
+  const { orders } = useSelector((state) => state.userReducer);
+  const { authUser } = useSelector((state) => state.authReducer);
 
   useEffect(() => {
     dispatch(fetchOrdersStart());
@@ -16,15 +16,13 @@ const Orders = () => {
   return authUser?.id ? (
     <div>
       <Title>Orders</Title>
-      {
-        orders.map((item) => (
-          <div style={{marginBottom: 50}}>
-            <p>{item.userId}</p>
-            <p>{item.status}</p>
-            <p>{item.totalPrice}</p>
-          </div>
-        ))
-      }
+      {orders.map((item) => (
+        <div style={{ marginBottom: 50 }}>
+          <p>{item.userId}</p>
+          <p>{item.status}</p>
+          <p>{item.totalPrice}</p>
+        </div>
+      ))}
     </div>
   ) : (
     <Redirect

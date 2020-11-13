@@ -33,7 +33,7 @@ $searchHeight: 54px;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 0 ($searchHeight / 6)  ($searchHeight / 6) 0;
+  border-radius: 0 ($searchHeight / 6) ($searchHeight / 6) 0;
   position: relative;
   appearance: none;
   border: none;
@@ -47,7 +47,7 @@ $searchHeight: 54px;
     left: 0;
     width: 1px;
     height: $searchHeight / 1.5;
-    background-color: #fafafa
+    background-color: #fafafa;
   }
   &:hover {
     .searchIcon {

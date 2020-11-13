@@ -1,10 +1,10 @@
-import React, {memo} from 'react';
+import React, { memo } from 'react';
 import s from './SearchResults.module.scss';
-import {useSelector} from 'react-redux';
-import {Link} from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const SearchResult = (props) => {
-  const {id, title, image} = props.item;
+  const { id, title, image } = props.item;
 
   return (
     <Link
@@ -18,26 +18,30 @@ const SearchResult = (props) => {
         <div className={s.title}>{title}</div>
       </div>
     </Link>
-  )
-}
+  );
+};
 
 const SearchResults = (props) => {
-  const {searchResults, searchActiveItem} = useSelector((state) => state.productsReducer);
+  const { searchResults, searchActiveItem } = useSelector(
+    (state) => state.productsReducer
+  );
 
-  return props.visible && (
-    <div className={`${s.searchResults} ${!!searchResults.length && s.visible}`}>
-      {
-        searchResults.map((item, index) => {
+  return (
+    props.visible && (
+      <div
+        className={`${s.searchResults} ${!!searchResults.length && s.visible}`}
+      >
+        {searchResults.map((item, index) => {
           return (
             <SearchResult
               key={item.id}
               item={item}
               active={index === searchActiveItem}
             />
-          )
-        })
-      }
-    </div>
+          );
+        })}
+      </div>
+    )
   );
 };
 

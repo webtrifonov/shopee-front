@@ -1,22 +1,22 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import s from './ProductsFilters.module.scss';
 import Accordion from '../Accordion/Accordion';
 import FilterItem from '../FilterItem/FilterItem';
 import Button from '../Button/Button';
-import {changeFilters} from '../../store/actions/productsActions';
-import {useDispatch, useSelector} from 'react-redux';
+import { changeFilters } from '../../store/actions/productsActions';
+import { useDispatch, useSelector } from 'react-redux';
 import PriceSlider from '../PriceSlider/PriceSlider';
-import {DIGITAL_REG} from '../../utils/constants';
-import {priceFormat} from '../../utils/validation';
-import {getMaxPrice} from '../../utils/utils';
+import { DIGITAL_REG } from '../../utils/constants';
+import { priceFormat } from '../../utils/validation';
+import { getMaxPrice } from '../../utils/utils';
 
 const ProductsFilters = (props) => {
   const dispatch = useDispatch();
-  const {categories} = props;
+  const { categories } = props;
 
   const MAX_PRICE = getMaxPrice(categories);
 
-  const {filters} = useSelector((state) => state.productsReducer);
+  const { filters } = useSelector((state) => state.productsReducer);
   const [filtersLocal, setFiltersLocal] = useState(filters);
   useEffect(() => {
     const maxPrice = getMaxPrice(categories);
@@ -26,7 +26,7 @@ const ProductsFilters = (props) => {
     });
   }, [categories, filters]);
   const changeCategoriesHandler = (event) => {
-    const {name} = event.target;
+    const { name } = event.target;
     let categories = filtersLocal?.categories ? filtersLocal.categories : [];
 
     if (!categories.includes(name)) {
@@ -38,52 +38,48 @@ const ProductsFilters = (props) => {
       ...filtersLocal,
       categories,
     });
-  }
+  };
   const changeExistsHandler = (event) => {
-    const {name, value} = event.target;
+    const { name, value } = event.target;
     setFiltersLocal({
       ...filtersLocal,
-     ...{[name]: value}
+      ...{ [name]: value },
     });
-  }
+  };
   const changeMinPriceHandler = (event) => {
-    let {value} = event.target;
+    let { value } = event.target;
     if (DIGITAL_REG.test(value)) {
       value = priceFormat(value, MAX_PRICE);
       setFiltersLocal({
         ...filtersLocal,
-        minPrice: value
+        minPrice: value,
       });
     }
-  }
+  };
   const changeMaxPriceHandler = (event) => {
-    let {value} = event.target;
+    let { value } = event.target;
 
     if (DIGITAL_REG.test(value)) {
       value = priceFormat(value, MAX_PRICE);
       setFiltersLocal({
         ...filtersLocal,
-        maxPrice: value
+        maxPrice: value,
       });
     }
-  }
+  };
   const applyFiltersHandler = (event) => {
     event.preventDefault();
     dispatch(changeFilters(filtersLocal));
-  }
+  };
 
   return (
     <form onSubmit={applyFiltersHandler} className={`${s.filters} bg-black`}>
       <Accordion
         summary={'Category'}
         Details={() => (
-          <fieldset
-            className={s.details}
-            onChange={changeCategoriesHandler}
-          >
-            {
-              categories?.length
-                ? categories.map((item) => {
+          <fieldset className={s.details} onChange={changeCategoriesHandler}>
+            {categories?.length
+              ? categories.map((item) => {
                   return (
                     <FilterItem
                       type="checkbox"
@@ -92,19 +88,16 @@ const ProductsFilters = (props) => {
                       title={item.title}
                       checked={filtersLocal?.categories?.includes(item.id)}
                     />
-                  )
-              }) : null
-            }
+                  );
+                })
+              : null}
           </fieldset>
         )}
       />
       <Accordion
         summary={'Existence'}
         Details={() => (
-          <fieldset
-            className={s.details}
-            onChange={changeExistsHandler}
-          >
+          <fieldset className={s.details} onChange={changeExistsHandler}>
             <FilterItem
               title={'all'}
               value={'all'}

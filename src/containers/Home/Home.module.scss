@@ -4,8 +4,7 @@
     'breadcrumbs breadcrumbs'
     'meta meta'
     'statusBar statusBar'
-    'filters products'
-  ;
+    'filters products';
   grid-template-columns: 4fr 8fr;
   grid-column-gap: 25px;
 }
@@ -21,12 +20,13 @@
 .statusBarTitle {
   font-size: 18px;
   color: #fafafa;
-  margin-right: 5px
+  margin-right: 5px;
 }
 .statusBarIcon {
   margin-left: 5px;
 }
-.view, .sorting {
+.view,
+.sorting {
   display: grid;
   grid-template-columns: 1fr auto auto;
   margin-left: 20px;
@@ -36,7 +36,8 @@
   grid-area: filters;
   padding: 0 15px;
 }
-.products, .noProducts {
+.products,
+.noProducts {
   grid-area: products;
 }
 .noProducts {

@@ -1,6 +1,6 @@
 import React from 'react';
 import s from './TopMenu.module.scss';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const TopMenu = () => {
   return (

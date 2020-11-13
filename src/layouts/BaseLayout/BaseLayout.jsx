@@ -18,7 +18,6 @@ const BaseLayout = (props) => {
         </div>
       </div>
     </div>
-
   );
-}
+};
 export default BaseLayout;

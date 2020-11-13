@@ -1,16 +1,21 @@
-import {CHANGE_FILTERS, CHANGE_VIEW_STATUS, FETCH, SEARCH} from '../actions/actionTypes';
-import {reducerGenerator} from '../../utils/store';
-import {SEARCH_ITEMS_LIMIT} from '../../utils/constants';
+import {
+  CHANGE_FILTERS,
+  CHANGE_VIEW_STATUS,
+  FETCH,
+  SEARCH,
+} from '../actions/actionTypes';
+import { reducerGenerator } from '../../utils/store';
+import { SEARCH_ITEMS_LIMIT } from '../../utils/constants';
 
 const calcSearchActiveItem = (searchActiveItem, income) => {
   let result = searchActiveItem + income;
   if (result < 0) {
-    result = 0
+    result = 0;
   } else if (result > SEARCH_ITEMS_LIMIT - 1) {
     result = 4;
   }
   return result;
-}
+};
 
 const HANDLERS = {
   [FETCH.PRODUCTS.START]: (state) => {
@@ -34,7 +39,7 @@ const HANDLERS = {
     };
   },
   [FETCH.CATEGORIES.START]: (state) => ({
-    ...state
+    ...state,
   }),
   [FETCH.CATEGORIES.SUCCESS]: (state, categories) => {
     return {
@@ -52,42 +57,42 @@ const HANDLERS = {
     return {
       ...state,
       viewStatus: payload,
-    }
+    };
   },
   [CHANGE_FILTERS]: (state, payload) => {
     return {
       ...state,
       filters: {
         ...state.filters,
-        ...payload
-      }
-    }
+        ...payload,
+      },
+    };
   },
   [SEARCH.FIELD]: (state, payload) => ({
     ...state,
-    searchField: payload
+    searchField: payload,
   }),
   [FETCH.SEARCH.SUCCESS]: (state, payload) => {
     return {
       ...state,
       searchResults: payload,
-    }
+    };
   },
   [SEARCH.ACTIVE_ITEM.CHANGE]: (state, payload) => {
     return {
       ...state,
-      searchActiveItem: payload
-    }
+      searchActiveItem: payload,
+    };
   },
   [SEARCH.ACTIVE_ITEM.INCREMENT]: (state) => {
     return {
       ...state,
-      searchActiveItem: calcSearchActiveItem(state.searchActiveItem, 1)
-    }
+      searchActiveItem: calcSearchActiveItem(state.searchActiveItem, 1),
+    };
   },
   [SEARCH.ACTIVE_ITEM.DECREMENT]: (state) => ({
     ...state,
-    searchActiveItem: calcSearchActiveItem(state.searchActiveItem, -1)
+    searchActiveItem: calcSearchActiveItem(state.searchActiveItem, -1),
   }),
   [FETCH.PRODUCT_BY_ID.START]: (state) => ({
     ...state,
@@ -107,7 +112,7 @@ const HANDLERS = {
       errorProduct: payload,
     };
   },
-}
+};
 const initialState = {
   products: [],
   categories: null,

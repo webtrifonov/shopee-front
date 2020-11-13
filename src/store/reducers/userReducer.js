@@ -1,11 +1,10 @@
-import {FETCH} from '../actions/actionTypes';
-import {reducerGenerator} from '../../utils/store';
-
+import { FETCH } from '../actions/actionTypes';
+import { reducerGenerator } from '../../utils/store';
 
 const HANDLERS = {
   [FETCH.ORDERS.START]: (state) => ({
     ...state,
-    loadingOrders: true
+    loadingOrders: true,
   }),
   [FETCH.ORDERS.SUCCESS]: (state, orders) => {
     return {
@@ -20,7 +19,7 @@ const HANDLERS = {
       errorOrders: error,
     };
   },
-}
+};
 const initialState = {
   loadingOrders: false,
   orders: [],

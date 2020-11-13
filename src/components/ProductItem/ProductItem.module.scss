@@ -14,7 +14,6 @@
     z-index: 10;
     backdrop-filter: blur(2px);
     background-color: #00000077;
-    
   }
 }
 .image {
@@ -29,7 +28,9 @@
 .body {
   flex: 1;
 }
-.title, .description, .price {
+.title,
+.description,
+.price {
   color: #fafafa;
 }
 .title {
@@ -42,7 +43,8 @@
 .price {
   font-size: 20px;
 }
-.addToCart, .buyNow {
+.addToCart,
+.buyNow {
   color: #fafafa;
   margin-right: 15px;
   margin-top: 10px;

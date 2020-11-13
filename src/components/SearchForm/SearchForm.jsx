@@ -1,21 +1,22 @@
-import React, {useRef, useState} from 'react';
+import React, { useRef, useState } from 'react';
 import s from './SearchForm.module.scss';
-import {SearchIcon} from '@primer/octicons-react';
-import {useDispatch, useSelector} from 'react-redux';
+import { SearchIcon } from '@primer/octicons-react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   changeSearchActiveItemDecrement,
   changeSearchActiveItemIncrement,
   changeSearchField,
-  fetchSearchStart
+  fetchSearchStart,
 } from '../../store/actions/productsActions';
 import SearchResults from '../SearchResults/SearchResults';
-import {debounce} from '../../utils/utils';
-import { useHistory } from "react-router-dom";
-
+import { debounce } from '../../utils/utils';
+import { useHistory } from 'react-router-dom';
 
 const SearchForm = () => {
   const dispatch = useDispatch();
-  const {searchField, searchResults, searchActiveItem} = useSelector((state) => state.productsReducer);
+  const { searchField, searchResults, searchActiveItem } = useSelector(
+    (state) => state.productsReducer
+  );
   const searchFieldRef = useRef();
   const [searchListVisible, setSearchListVisible] = useState(false);
 
@@ -27,7 +28,7 @@ const SearchForm = () => {
     } else {
       dispatch(fetchSearchStart(searchField));
     }
-  }
+  };
 
   const searchListener = (e) => {
     if (e.key === 'ArrowDown') {
@@ -41,28 +42,26 @@ const SearchForm = () => {
     if (e.key === 'Enter') {
       searchHandler(e);
     }
-  }
+  };
   const history = useHistory();
-
-
 
   const search = (event) => {
     event.preventDefault();
-    const {value} = event.target;
+    const { value } = event.target;
     dispatch(changeSearchField(value));
     debounce(() => dispatch(fetchSearchStart(value)), 500)(value);
-  }
+  };
 
   const onFocusIn = (event) => {
     dispatch(fetchSearchStart(searchField));
     setSearchListVisible(true);
-  }
+  };
   const onFocusOut = (event) => {
     // Hide list after redirect
     setTimeout(() => {
       setSearchListVisible(false);
     }, 100);
-  }
+  };
 
   return (
     <form
@@ -83,16 +82,11 @@ const SearchForm = () => {
           autoComplete="off"
           onKeyDown={searchListener}
         />
-        <button
-          className={s.searchButton}
-          type="submit"
-        >
+        <button className={s.searchButton} type="submit">
           <SearchIcon size={30} className={s.searchIcon} />
         </button>
       </div>
-      <SearchResults
-        visible={searchListVisible}
-      />
+      <SearchResults visible={searchListVisible} />
     </form>
   );
 };

@@ -1,33 +1,35 @@
 import { call, put } from 'redux-saga/effects';
 import axios from '../../utils/server';
-import {FETCH} from '../actions/actionTypes';
-import {sagaGenerator} from '../../utils/store';
-import {all} from '@redux-saga/core/effects';
-import {closeModal, toggleTooltip} from '../actions/appActions';
+import { FETCH } from '../actions/actionTypes';
+import { sagaGenerator } from '../../utils/store';
+import { all } from '@redux-saga/core/effects';
+import { closeModal, toggleTooltip } from '../actions/appActions';
 import {
   changeAuthToken,
-  changeSignInNoValidEmail, changeSignInNoValidPassword,
-  changeSignUpNoValidEmail, changeSignUpNoValidPassword,
+  changeSignInNoValidEmail,
+  changeSignInNoValidPassword,
+  changeSignUpNoValidEmail,
+  changeSignUpNoValidPassword,
   fetchAuthUserSuccess,
-  fetchRegisterSuccess
+  fetchRegisterSuccess,
 } from '../actions/authActions';
-import {STORAGE_TOKEN, TOOLTIP_DURATION} from '../../utils/constants';
-import {delay} from '../../utils/utils';
+import { STORAGE_TOKEN, TOOLTIP_DURATION } from '../../utils/constants';
+import { delay } from '../../utils/utils';
 
 const HANDLERS = {
-  * [FETCH.REGISTER.START]({payload}) {
+  *[FETCH.REGISTER.START]({ payload }) {
     try {
       const response = yield call(axios, {
         method: 'POST',
         url: `/auth/register`,
-        data: payload
+        data: payload,
       });
 
       if (response.data?.success) {
-        const {user, token} = response.data;
+        const { user, token } = response.data;
         // localStorage.setItem(STORAGE_TOKEN, token);
         yield put(toggleTooltip('Success registration!'));
-        yield delay(TOOLTIP_DURATION)
+        yield delay(TOOLTIP_DURATION);
         yield all([
           put(closeModal()),
           put(changeAuthToken(token)),
@@ -35,8 +37,11 @@ const HANDLERS = {
           put(changeSignUpNoValidEmail([])),
           put(changeSignUpNoValidPassword([])),
         ]);
-      } else  {
-        if (response.data?.message === 'повторяющееся значение ключа нарушает ограничение уникальности "users_email_key"') {
+      } else {
+        if (
+          response.data?.message ===
+          'повторяющееся значение ключа нарушает ограничение уникальности "users_email_key"'
+        ) {
           yield put(changeSignUpNoValidEmail(['That email is also used']));
         } else {
           yield put(changeSignUpNoValidEmail([response.data?.message]));
@@ -46,18 +51,18 @@ const HANDLERS = {
       yield put(toggleTooltip(error.message));
     }
   },
-  * [FETCH.LOGIN.START]({payload: {email, password, rememberMe}}) {
+  *[FETCH.LOGIN.START]({ payload: { email, password, rememberMe } }) {
     try {
       const response = yield call(axios, {
         method: 'POST',
         url: `/auth/login`,
         data: {
           email,
-          password
-        }
+          password,
+        },
       });
       if (response.data?.success) {
-        const {user, token} = response.data;
+        const { user, token } = response.data;
         if (rememberMe) {
           localStorage.setItem(STORAGE_TOKEN, token);
         }
@@ -68,7 +73,7 @@ const HANDLERS = {
           put(changeSignInNoValidEmail([])),
           put(changeSignInNoValidPassword([])),
         ]);
-      } else  {
+      } else {
         if (response.data?.message === 'You entered the wrong password') {
           yield put(changeSignInNoValidPassword([response.data?.message]));
         } else {
@@ -79,7 +84,7 @@ const HANDLERS = {
       yield put(toggleTooltip(error.message));
     }
   },
-  * [FETCH.AUTH_USER.START]({payload}) {
+  *[FETCH.AUTH_USER.START]({ payload }) {
     try {
       const response = yield call(axios, {
         method: 'GET',
@@ -89,14 +94,12 @@ const HANDLERS = {
         },
       });
       if (response.data?.success) {
-        const {user} = response.data;
-        yield all([
-          put(fetchAuthUserSuccess(user)),
-        ]);
+        const { user } = response.data;
+        yield all([put(fetchAuthUserSuccess(user))]);
       }
     } catch (error) {
       yield put(toggleTooltip(error.message));
     }
   },
-}
+};
 export default sagaGenerator(HANDLERS);

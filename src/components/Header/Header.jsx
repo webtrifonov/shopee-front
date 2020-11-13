@@ -9,7 +9,7 @@ const Header = () => {
   return (
     <div className={s.header}>
       <div className={s.logo}>
-        <Logo fill='#DC4055' />
+        <Logo fill="#DC4055" />
       </div>
       <TopMenu />
       <SearchForm />

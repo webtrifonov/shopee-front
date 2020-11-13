@@ -9,12 +9,7 @@
   left: 0;
   bottom: 0;
   right: 0;
-  z-index: 1001;
-}
-.tooltip {
-  background-color: #333333;
-  border: 1px solid #fafafa;
-  color: #fafafa;
-  padding: 10px 15px;
-  border-radius: 20px;
+  backdrop-filter: blur(2px);
+  background-color: #00000077;
+  z-index: 1000;
 }

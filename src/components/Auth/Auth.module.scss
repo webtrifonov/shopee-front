@@ -10,11 +10,11 @@
   }
   .signUp {
     margin-left: 0;
-    background-color: #E3AB37;
+    background-color: #e3ab37;
   }
   .signIn {
     margin-left: 25px;
-    background-color: #DC4055;
+    background-color: #dc4055;
   }
 }
 
@@ -59,11 +59,11 @@
   text-align: center;
   .signUp {
     margin-left: 0;
-    background-color: #E3AB37;
+    background-color: #e3ab37;
   }
   .signIn {
     margin-left: 25px;
-    background-color: #DC4055;
+    background-color: #dc4055;
   }
   .input {
     margin-top: 20px;
@@ -76,16 +76,26 @@
 .notValid {
   display: block;
   font-size: 14px;
-  color: #DC4055;
+  color: #dc4055;
 }
 
 .animateShake {
   animation: animateShake 300ms;
 }
 @keyframes animateShake {
-  0% { transform: translateX(0%); }
-  70% { transform: translateX(0%); }
-  80% { transform: translateX(5%); }
-  90% { transform: translateX(-5%); }
-  100% { transform: translateX(0%); }
+  0% {
+    transform: translateX(0%);
+  }
+  70% {
+    transform: translateX(0%);
+  }
+  80% {
+    transform: translateX(5%);
+  }
+  90% {
+    transform: translateX(-5%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
 }

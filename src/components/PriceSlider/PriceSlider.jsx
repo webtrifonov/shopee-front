@@ -3,9 +3,11 @@ import s from './PriceSlider.module.scss';
 
 const PriceSlider = (props) => {
   const {
-    minPrice, maxPrice,
+    minPrice,
+    maxPrice,
     MAX_PRICE,
-    changeMinPriceHandler, changeMaxPriceHandler
+    changeMinPriceHandler,
+    changeMaxPriceHandler,
   } = props;
 
   return (
@@ -22,13 +24,14 @@ const PriceSlider = (props) => {
       <div className={s.priceSlider}>
         <div className={s.priceSliderPart} />
         <div
-          style={{left: `${(minPrice / MAX_PRICE) * 100}%`}}
+          style={{ left: `${(minPrice / MAX_PRICE) * 100}%` }}
           className={s.sliderCorner}
         />
 
         <div
-          style={{left: `${(maxPrice / MAX_PRICE) * 100}%`}}
-          className={s.sliderCorner} />
+          style={{ left: `${(maxPrice / MAX_PRICE) * 100}%` }}
+          className={s.sliderCorner}
+        />
       </div>
       <input
         onChange={changeMaxPriceHandler}
@@ -38,7 +41,6 @@ const PriceSlider = (props) => {
         maxLength="6"
         value={maxPrice}
       />
-
     </div>
   );
 };

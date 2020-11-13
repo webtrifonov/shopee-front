@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import s from '../../Auth/Auth.module.scss';
 import Title from '../../Title/Title';
 import Input from '../../Input/Input';
 import Button from '../../Button/Button';
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   changeSignUpFieldEmail,
   changeSignUpFieldPassword,
@@ -11,44 +11,49 @@ import {
   changeSignUpNoValidPassword,
   fetchRegisterStart,
 } from '../../../store/actions/authActions';
-import {validationEmail, validationPassword} from '../../../utils/validation';
+import { validationEmail, validationPassword } from '../../../utils/validation';
 
 const SignUpContent = () => {
   const dispatch = useDispatch();
   const [animate, setAnimate] = useState(false);
   const {
-    signUpFieldEmail, signUpFieldPassword,
-    signUpNoValidEmail, signUpNoValidPassword
+    signUpFieldEmail,
+    signUpFieldPassword,
+    signUpNoValidEmail,
+    signUpNoValidPassword,
   } = useSelector((state) => state.authReducer);
 
   const signUpEmail = (event) => {
-    const {value} = event.target;
+    const { value } = event.target;
     dispatch(changeSignUpFieldEmail(value));
     const validationErrors = validationEmail(value);
     dispatch(changeSignUpNoValidEmail(validationErrors));
-  }
+  };
   const signUpPassword = (event) => {
-    const {value} = event.target;
+    const { value } = event.target;
     dispatch(changeSignUpFieldPassword(value));
     const validationErrors = validationPassword(value);
     dispatch(changeSignUpNoValidPassword(validationErrors));
-  }
+  };
 
   const signUp = (event) => {
     event.preventDefault();
     if (
-      (signUpNoValidEmail.length || signUpNoValidPassword.length)
-      || (signUpFieldEmail === '' || signUpFieldPassword === '')
+      signUpNoValidEmail.length ||
+      signUpNoValidPassword.length ||
+      signUpFieldEmail === '' ||
+      signUpFieldPassword === ''
     ) {
       setAnimate(true);
     } else {
-      dispatch(fetchRegisterStart({
-        email: signUpFieldEmail,
-        password: signUpFieldPassword,
-      }))
+      dispatch(
+        fetchRegisterStart({
+          email: signUpFieldEmail,
+          password: signUpFieldPassword,
+        })
+      );
     }
-
-  }
+  };
 
   return (
     <div
@@ -65,8 +70,11 @@ const SignUpContent = () => {
           value={signUpFieldEmail}
         />
         {!!signUpNoValidEmail.length &&
-          signUpNoValidEmail.map((item, index) => <span key={index} className={s.notValid}>{item}</span>)
-        }
+          signUpNoValidEmail.map((item, index) => (
+            <span key={index} className={s.notValid}>
+              {item}
+            </span>
+          ))}
         <Input
           className={s.input}
           type="password"
@@ -76,8 +84,11 @@ const SignUpContent = () => {
           value={signUpFieldPassword}
         />
         {!!signUpNoValidPassword.length &&
-          signUpNoValidPassword.map((item, index) => <span key={index} className={s.notValid}>{item}</span>)
-        }
+          signUpNoValidPassword.map((item, index) => (
+            <span key={index} className={s.notValid}>
+              {item}
+            </span>
+          ))}
         <Button
           onClick={signUp}
           type="submit"

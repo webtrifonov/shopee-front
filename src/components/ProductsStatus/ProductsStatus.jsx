@@ -1,24 +1,31 @@
 import React from 'react';
 import s from '../../containers/Home/Home.module.scss';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faSortAmountDown, faSortAmountUp, faThLarge, faThList} from '@fortawesome/free-solid-svg-icons';
-import {useDispatch} from 'react-redux';
-import {changeFilters, changeViewStatus} from '../../store/actions/productsActions';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faSortAmountDown,
+  faSortAmountUp,
+  faThLarge,
+  faThList,
+} from '@fortawesome/free-solid-svg-icons';
+import { useDispatch } from 'react-redux';
+import {
+  changeFilters,
+  changeViewStatus,
+} from '../../store/actions/productsActions';
 
-const ProductsStatus = ({count, viewStatus, filters}) => {
+const ProductsStatus = ({ count, viewStatus, filters }) => {
   const dispatch = useDispatch();
   const changeView = (status) => {
     dispatch(changeViewStatus(status));
-  }
+  };
 
   const changeOrder = (order) => {
-    dispatch(changeFilters({order}));
-  }
+    dispatch(changeFilters({ order }));
+  };
   return (
     <div className={`${s.statusBar} bg-black`}>
       <div className={s.statusBarTitle}>{count} products</div>
       <div className={s.view}>
-
         <div className={s.statusBarTitle}>View</div>
         <FontAwesomeIcon
           onClick={() => changeView('list')}
