@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Title from '../../Title/Title';
 import Input from '../../Input/Input';
-import s from '../../Auth/Auth.module.scss';
+import s from '../../../modules/Header/components/AuthBar/authBar.module.scss';
 import Button from '../../Button/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -13,7 +13,7 @@ import {
   fetchLoginStart,
 } from '../../../store/actions/authActions';
 import { validationEmail, validationPassword } from '../../../utils/validation';
-import FilterItem from '../../FilterItem/FilterItem';
+import FilterItem from '../../../modules/ListingsFiltersBar/components/FilterItem/FilterItem';
 
 const SignInContent = () => {
   const dispatch = useDispatch();
@@ -76,13 +76,8 @@ const SignInContent = () => {
           placeholder="E-mail"
           onChange={signInEmail}
           value={signInFieldEmail}
+          errors={signInNoValidEmail}
         />
-        {!!signInNoValidEmail.length &&
-          signInNoValidEmail.map((item, index) => (
-            <span key={index} className={s.notValid}>
-              {item}
-            </span>
-          ))}
         <Input
           className={s.input}
           type="password"
@@ -90,13 +85,8 @@ const SignInContent = () => {
           placeholder="Password"
           onChange={signInPassword}
           value={signInFieldPassword}
+          errors={signInNoValidPassword}
         />
-        {!!signInNoValidPassword.length &&
-          signInNoValidPassword.map((item, index) => (
-            <span key={index} className={s.notValid}>
-              {item}
-            </span>
-          ))}
         <FilterItem
           className={s.rememberMe}
           type="checkbox"

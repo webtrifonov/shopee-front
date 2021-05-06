@@ -3,7 +3,6 @@ import axios from '../../utils/server';
 import { FETCH } from '../actions/actionTypes';
 import { sagaGenerator } from '../../utils/store';
 import { all } from '@redux-saga/core/effects';
-import { closeModal, toggleTooltip } from '../actions/appActions';
 import {
   changeAuthToken,
   changeSignInNoValidEmail,
@@ -15,6 +14,8 @@ import {
 } from '../actions/authActions';
 import { STORAGE_TOKEN, TOOLTIP_DURATION } from '../../utils/constants';
 import { delay } from '../../utils/utils';
+import { closeModal } from '../../modules/BaseModal';
+import { toggleTooltip } from '../../modules/Tooltip';
 
 const HANDLERS = {
   *[FETCH.REGISTER.START]({ payload }) {

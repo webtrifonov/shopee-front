@@ -1,13 +1,12 @@
 import React, { memo } from 'react';
-import s from './BaseModal.module.scss';
+import s from './baseModal.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { closeModal } from './baseModalActions';
+import { closeModal } from './baseModal.actions';
 import DefaultCentralModal from './components/DefaultCentralModal/DefaultCentralModal';
+import { baseModalSelector } from './baseModal.selector';
 
-const BaseModal = () => {
-  const { visible, Content, onClose } = useSelector(
-    (state) => state.baseModalReducer
-  );
+let BaseModal = () => {
+  const { visible, Content, onClose } = useSelector(baseModalSelector);
   const dispatch = useDispatch();
   const onCloseHandler = (event) => {
     event.preventDefault();
@@ -34,5 +33,5 @@ const BaseModal = () => {
     </div>
   ) : null;
 };
-
-export default memo(BaseModal);
+BaseModal = memo(BaseModal);
+export { BaseModal };

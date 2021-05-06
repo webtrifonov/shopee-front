@@ -1,0 +1,3 @@
+export const TOGGLE_TOOLTIP = 'TOGGLE_TOOLTIP';
+
+export const TOOLTIP_DURATION = 1500;

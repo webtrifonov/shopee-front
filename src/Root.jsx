@@ -6,19 +6,36 @@ import './assets/css/main.scss';
 import './assets/css/media.scss';
 import Loader from './components/icons/Loader/Loader';
 import withLayout from './utils/hocs';
-import Tooltip from './components/modals/Tooltip/Tooltip';
-import Modal from './modules/BaseModal/BaseModal';
-const BaseLayout = lazy(() => import('./layouts/BaseLayout/BaseLayout'));
-const Home = lazy(() => import('./containers/Home/Home'));
-const Product = lazy(() => import('./containers/Product/Product'));
-const About = lazy(() => import('./containers/About/About'));
+import { BaseModal } from './modules/BaseModal';
+import { Tooltip } from './modules/Tooltip';
+
+const HomePage = lazy(() =>
+  import('./pages/Home').then((module) => ({ default: module.HomePage }))
+);
+const AboutPage = lazy(() =>
+  import('./pages/About').then((module) => ({ default: module.AboutPage }))
+);
+const ListingPage = lazy(() =>
+  import('./pages/Listing').then((module) => ({ default: module.ListingPage }))
+);
+const BaseLayout = lazy(() =>
+  import('./layouts/BaseLayout/BaseLayout').then((module) => ({
+    default: module.BaseLayout,
+  }))
+);
+// const Product = lazy(() => import('./containers/Product/Product'));
 const Orders = lazy(() => import('./containers/Orders/Orders'));
 const WishList = lazy(() => import('./containers/WishList/WishList'));
+const NotFound404Page = lazy(() =>
+  import('./pages/NotFound404Page').then((module) => ({
+    default: module.NotFound404Page,
+  }))
+);
 
-function Root() {
+const Root = () => {
   return (
     <Provider store={store}>
-      <Modal />
+      <BaseModal />
       <Tooltip />
       <BrowserRouter>
         <Suspense fallback={<Loader global />}>
@@ -33,18 +50,26 @@ function Root() {
             />
             <Route
               path="/about"
-              component={withLayout(BaseLayout, About, {})}
+              component={withLayout(BaseLayout, AboutPage, {})}
             />
             <Route
-              path="/products/:id"
-              component={withLayout(BaseLayout, Product, {})}
+              path="/products/:listingId"
+              component={withLayout(BaseLayout, ListingPage, {})}
             />
-            <Route path="/" component={withLayout(BaseLayout, Home, {})} />
+            <Route
+              exact
+              path="/"
+              component={withLayout(BaseLayout, HomePage, {})}
+            />
+            <Route
+              path="/"
+              component={withLayout(BaseLayout, NotFound404Page, {})}
+            />
           </Switch>
         </Suspense>
       </BrowserRouter>
     </Provider>
   );
-}
+};
 
 export default Root;

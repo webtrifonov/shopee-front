@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import s from '../../Auth/Auth.module.scss';
+import s from '../../../modules/Header/components/AuthBar/authBar.module.scss';
 import Title from '../../Title/Title';
 import Input from '../../Input/Input';
 import Button from '../../Button/Button';
@@ -68,13 +68,8 @@ const SignUpContent = () => {
           placeholder="E-mail"
           onChange={signUpEmail}
           value={signUpFieldEmail}
+          errors={signUpNoValidEmail}
         />
-        {!!signUpNoValidEmail.length &&
-          signUpNoValidEmail.map((item, index) => (
-            <span key={index} className={s.notValid}>
-              {item}
-            </span>
-          ))}
         <Input
           className={s.input}
           type="password"
@@ -82,13 +77,8 @@ const SignUpContent = () => {
           placeholder="Password"
           onChange={signUpPassword}
           value={signUpFieldPassword}
+          errors={signUpNoValidPassword}
         />
-        {!!signUpNoValidPassword.length &&
-          signUpNoValidPassword.map((item, index) => (
-            <span key={index} className={s.notValid}>
-              {item}
-            </span>
-          ))}
         <Button
           onClick={signUp}
           type="submit"

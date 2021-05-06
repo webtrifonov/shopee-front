@@ -1,14 +1,14 @@
 import { combineReducers } from 'redux';
-import appReducer from './appReducer';
 import authReducer from './authReducer';
-import productsReducer from './productsReducer';
 import userReducer from './userReducer';
-import baseModalReducer from '../../modules/BaseModal/baseModalReducer';
+import { baseModal } from '../../modules/BaseModal';
+import { homePage } from '../../pages/Home';
+import { tooltip } from '../../modules/Tooltip';
 
 export default combineReducers({
-  appReducer,
   authReducer,
-  productsReducer,
   userReducer,
-  baseModalReducer,
+  baseModal,
+  tooltip,
+  ...homePage,
 });

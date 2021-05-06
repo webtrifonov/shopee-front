@@ -1,0 +1,23 @@
+.mainContainer {
+	display: grid;
+	grid-template-areas:
+		'breadcrumbs breadcrumbs'
+		'meta meta'
+		'statusBar statusBar'
+		'filters listings';
+	grid-template-columns: 4fr 8fr;
+	grid-column-gap: 25px;
+}
+
+.filters {
+	grid-area: filters;
+	padding: 0 15px;
+}
+.products,
+.noProducts {
+	grid-area: products;
+}
+.noProducts {
+	margin-top: 10px;
+	color: #fafafa;
+}
