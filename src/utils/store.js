@@ -18,3 +18,36 @@ export const sagaGenerator = (handlers) =>
     }, []);
     yield all([...sagas]);
   };
+
+export const createActions = (actionTypes) => {
+  const actions = actionTypes.reduce((acc, actionType) => {
+    const functionName = actionType.split('_').map((str, index) => {
+      return index ? str[0].toUpperCase() + str.slice(1) : str;
+    });
+    acc[functionName] = (payload) => ({
+      type: actionType,
+      payload,
+    });
+    return acc;
+  }, {});
+  console.log('>>> actions   = ', actions);
+
+  return actions;
+};
+
+export const gen3Types = (actionType) => {
+  return [
+    actionType + '_REQUEST',
+    actionType + '_SUCCESS',
+    actionType + '_FAILURE',
+  ];
+};
+
+export const getRequestType = (baseActionType) => {
+  const types = ['REQUEST', 'SUCCESS', 'FAILURE'];
+
+  return types.reduce((acc, type) => {
+    acc[type] = `${baseActionType}_${type}`;
+    return acc;
+  }, {});
+};

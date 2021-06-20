@@ -1,0 +1,46 @@
+.sendMessageForm {
+	display: grid;
+	grid-template-areas:
+		'name actions'
+		'message actions'
+	;
+	grid-template-columns: 1fr auto;
+	.nameField {
+		grid-area: name;
+	}
+	.name {
+		width: -webkit-fill-available;
+	}
+	.messageField {
+		grid-area: message;
+		margin-top: 5px;
+	}
+	.message {
+		width: -webkit-fill-available;
+	}
+	.actions {
+		max-width: 50px;
+		grid-area: actions;
+		padding: 0 5px;
+	}
+	.sendMessageButton{
+		margin: 0px 3px;
+		width: 50px;
+		height: 50px;
+		border: none;
+		outline: none;
+		border-radius: 9px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-color: #E3AB37;
+		box-shadow: 2px 2px 3px 1px darken(#E3AB37, 35%);
+		&:active {
+			box-shadow: inset 0px 0px 3px -1px darken(#E3AB37, 75%);
+		}
+	}
+	.sendMessage {
+		margin-left: -2px;
+	}
+}
+

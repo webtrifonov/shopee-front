@@ -18,6 +18,9 @@ const AboutPage = lazy(() =>
 const ListingPage = lazy(() =>
   import('./pages/Listing').then((module) => ({ default: module.ListingPage }))
 );
+const ChatPage = lazy(() =>
+  import('./pages/Chat').then((module) => ({ default: module.ChatPage }))
+);
 const BaseLayout = lazy(() =>
   import('./layouts/BaseLayout/BaseLayout').then((module) => ({
     default: module.BaseLayout,
@@ -50,12 +53,13 @@ const Root = () => {
             />
             <Route
               path="/about"
-              component={withLayout(BaseLayout, AboutPage, {})}
+              component={withLayout(BaseLayout, AboutPage)}
             />
             <Route
               path="/products/:listingId"
-              component={withLayout(BaseLayout, ListingPage, {})}
+              component={withLayout(BaseLayout, ListingPage)}
             />
+            <Route path="/chat" component={withLayout(BaseLayout, ChatPage)} />
             <Route
               exact
               path="/"

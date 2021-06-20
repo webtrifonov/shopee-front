@@ -2,8 +2,9 @@ import { combineReducers } from 'redux';
 import authReducer from './authReducer';
 import userReducer from './userReducer';
 import { baseModal } from '../../modules/BaseModal';
-import { homePage } from '../../pages/Home';
 import { tooltip } from '../../modules/Tooltip';
+import { homePage } from '../../pages/Home';
+import { chatPage } from '../../pages/Chat';
 
 export default combineReducers({
   authReducer,
@@ -11,4 +12,5 @@ export default combineReducers({
   baseModal,
   tooltip,
   ...homePage,
+  ...chatPage,
 });
