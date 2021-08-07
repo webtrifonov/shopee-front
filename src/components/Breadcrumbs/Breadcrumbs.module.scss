@@ -1,3 +1,26 @@
 .breadcrumbs {
   padding: 0 15px;
+  display: flex;
+  flex-wrap: wrap;
+  .link {
+    color: #777777;
+    cursor: pointer;
+    &:hover {
+      color: #FAFAFA;
+    }
+  }
+  .lastLink {
+    color: #777777;
+    cursor: default;
+  }
+  .linkContainer {
+    padding: 0px 10px 0px 0px;
+    &:not(:last-child):after {
+      content: '\00BB';
+      margin-left: 10px;
+      display: inline-block;
+      color: #777777;
+    }
+  }
 }
+

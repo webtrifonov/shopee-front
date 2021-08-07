@@ -5,13 +5,14 @@ import classNames from 'classnames';
 import { HeaderMenu } from './components/HeaderMenu/HeaderMenu';
 import { AuthBar } from './components/AuthBar/AuthBar';
 import { SearchForm } from '../SearchForm';
+import { Link } from 'react-router-dom';
 
 export const Header = memo(() => {
   return (
     <div className={classNames(s.headerContainer, `bg-black`)}>
-      <div className={s.logo}>
+      <Link to={'/'} className={s.logo}>
         <Logo fill="#DC4055" />
-      </div>
+      </Link>
       <HeaderMenu />
       <SearchForm />
       <AuthBar />
