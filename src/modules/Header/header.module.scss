@@ -1,4 +1,5 @@
 .headerContainer {
+	grid-area: header;
 	display: grid;
 	grid-template-areas:
 		'logo authBar'
@@ -7,6 +8,17 @@
 	;
 	grid-template-columns: 7fr 5fr;
 	padding: 0 15px;
+	margin-top: 8px;
+	border-radius: 9px;
+	@media(max-width: 768px) {
+		grid-template-columns: 12fr;
+		grid-template-areas:
+			'logo'
+			'headerMenu'
+			'searchForm'
+			'authBar'
+	;
+	}
 }
 .headerLeft {
 	grid-area: headerLeft;
