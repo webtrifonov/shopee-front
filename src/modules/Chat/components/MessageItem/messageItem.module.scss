@@ -2,11 +2,17 @@
 
 }
 .messageItem {
-	display: flex;
+	display: grid;
+	grid-template-columns: auto 1fr auto;
+	grid-template-areas:
+		'avatar name status'
+		'avatar message message';
 	color: #fafafa;
 	margin-bottom: 5px;
 	border-radius: 9px;
 	.imageContainer {
+		grid-area: avatar;
+		
 		width: 100px;
 		height: 100px;
 		display: flex;
@@ -14,17 +20,24 @@
 		align-items: center;
 		
 	}
+	.name {
+		grid-area: name;
+		
+	  font-size: 24px;
+	  font-weight: 600;
+	  margin-top: 10px;
+	}
+	.message {
+		grid-area: message;
+		
+		margin: 20px 0;
+		font-size: 16px;
+	}
 	.textContainer {
 		margin-left: 5px;
-		.name {
-			font-size: 24px;
-			font-weight: 600;
-			margin-top: 10px;
-		}
-		.message {
-			margin: 20px 0;
-			font-size: 16px;
-		}
+	}
+	.status {
+		grid-area: status;
 	}
 }
 

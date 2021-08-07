@@ -1,0 +1,14 @@
+.list {
+	background-color: #191919;
+	border-radius: 9px;
+}
+.item {
+	color: #FAFAFA;
+	padding: 15px 0px;
+	margin: 0px 15px;
+	text-overflow: ellipsis;
+	&:not(:last-child){
+		border-bottom: 1px solid #FAFAFA;
+	}
+	
+}

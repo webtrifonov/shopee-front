@@ -9,20 +9,15 @@ export const MessageList = memo(() => {
     socket.on('GET_MESSAGES', (payload) => {
       setMessageList(payload.messageList);
     });
-    socket.on('RECEIVE_MESSAGE', (payload) => {
+    socket.on('NEW_MESSAGE', (payload) => {
       console.log('>>> payload = ', payload);
 
       setMessageList((prev) => [...prev, payload.messageData]);
     });
-
-    return () => {
-      socket.off('GET_MESSAGES');
-      socket.off('RECEIVE_MESSAGE');
-    };
   }, []);
 
   return (
-    <div className={s.messageList}>
+    <div className={s.messageListContainer}>
       {messageList?.length
         ? messageList.map((item) => <MessageItem key={item.id} item={item} />)
         : null}

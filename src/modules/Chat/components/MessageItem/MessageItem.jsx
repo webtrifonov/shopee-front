@@ -14,6 +14,10 @@ export const MessageItem = ({ item: { id, image, name, message } }) => {
           <div className={s.name}>{name}</div>
           <div className={s.message}>{message}</div>
         </div>
+        {/*<div className={s.textContainer}>*/}
+        {/*  <div className={s.name}>{name}</div>*/}
+        {/*  <div className={s.message}>{message}</div>*/}
+        {/*</div>*/}
       </div>
     </div>
   );

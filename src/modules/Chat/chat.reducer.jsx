@@ -1,13 +1,7 @@
 import { reducerGenerator } from '../../utils/store';
-import { LISTINGS, SET } from './chat.constants';
+import { SET, GET_CHATROOM_USER_LIST } from './chat.constants';
 
 const HANDLERS = {
-  [LISTINGS.REQUEST]: (state) => {
-    return {
-      ...state,
-      loadingListings: true,
-    };
-  },
   [SET.SEND_FORM]: (state, payload) => {
     return {
       ...state,
@@ -17,6 +11,13 @@ const HANDLERS = {
       },
     };
   },
+  [GET_CHATROOM_USER_LIST.SUCCESS]: (state, payload) => {
+    return {
+      ...state,
+      chatroomUserList: payload.chatroomUserList,
+      count: payload.count,
+    };
+  },
 };
 const initialState = {
   loadingListings: false,
@@ -24,5 +25,6 @@ const initialState = {
     name: '',
     message: '',
   },
+  chatroomUserList: [],
 };
 export const chat = reducerGenerator(initialState, HANDLERS);

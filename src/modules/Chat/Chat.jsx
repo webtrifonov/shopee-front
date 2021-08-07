@@ -1,8 +1,9 @@
 import s from './chat.module.scss';
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useEffect } from 'react';
 import { MessageList } from './components/MessageList/MessageList';
 import { SendMessageForm } from './components/SendMessageForm/SendMessageForm';
 import socket from '../../utils/socket';
+import { ChatroomUserList } from './components/ChatroomUserList/ChatroomUserList';
 
 export const Chat = memo(() => {
   useEffect(() => {
@@ -14,11 +15,16 @@ export const Chat = memo(() => {
     };
   }, []);
   return (
-    <>
+    <div className={s.chat}>
+      <div className={s.participantsWrapper}>
+        <ChatroomUserList />
+      </div>
       <div className={s.messageListWrapper}>
         <MessageList />
       </div>
-      <SendMessageForm />
-    </>
+      <div className={s.sendMessageFormWrapper}>
+        <SendMessageForm />
+      </div>
+    </div>
   );
 });

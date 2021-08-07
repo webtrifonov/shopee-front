@@ -14,7 +14,7 @@ export const getListingsSuccess = (payload) => {
 };
 export const getListingsFailure = (error) => {
   return {
-    type: LISTINGS.REQUEST,
+    type: LISTINGS.FAILURE,
     payload: error,
   };
 };

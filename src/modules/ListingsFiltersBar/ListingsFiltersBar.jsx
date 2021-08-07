@@ -142,11 +142,7 @@ export const ListingsFiltersBar = () => {
         )}
       />
       <div className={s.applyFilters}>
-        <Button
-          type="submit"
-          className={s.applyFiltersButton}
-          color={'#DC4055'}
-        >
+        <Button type="submit" color={'#DC4055'}>
           Apply filters
         </Button>
       </div>
