@@ -8,6 +8,7 @@ import Loader from './components/icons/Loader/Loader';
 import withLayout from './utils/hocs';
 import { BaseModal } from './modules/BaseModal';
 import { Tooltip } from './modules/Tooltip';
+import { ErrorBoundary } from './components/ErrorBoundary/ErrorBoundary';
 
 const HomePage = lazy(() =>
   import('./pages/Home').then((module) => ({ default: module.HomePage }))
@@ -37,42 +38,52 @@ const NotFound404Page = lazy(() =>
 
 const Root = () => {
   return (
-    <Provider store={store}>
-      <BaseModal />
-      <Tooltip />
-      <BrowserRouter>
-        <Suspense fallback={<Loader global />}>
-          <Switch>
-            <Route
-              path="/wishlist"
-              component={withLayout(BaseLayout, WishList, { auth: true })}
-            />
-            <Route
-              path="/orders"
-              component={withLayout(BaseLayout, Orders, { auth: true })}
-            />
-            <Route
-              path="/about"
-              component={withLayout(BaseLayout, AboutPage)}
-            />
-            <Route
-              path="/products/:listingId"
-              component={withLayout(BaseLayout, ListingPage)}
-            />
-            <Route path="/chat" component={withLayout(BaseLayout, ChatPage)} />
-            <Route
-              exact
-              path="/"
-              component={withLayout(BaseLayout, HomePage, {})}
-            />
-            <Route
-              path="/"
-              component={withLayout(BaseLayout, NotFound404Page, {})}
-            />
-          </Switch>
-        </Suspense>
-      </BrowserRouter>
-    </Provider>
+    <ErrorBoundary>
+      <Provider store={store}>
+        <BaseModal />
+        <Tooltip />
+        <BrowserRouter>
+          <Suspense fallback={<Loader global />}>
+            <Switch>
+              <Route
+                path="/wishlist"
+                component={withLayout(BaseLayout, WishList, { auth: true })}
+              />
+              <Route
+                path="/orders"
+                component={withLayout(BaseLayout, Orders, { auth: true })}
+              />
+              <Route
+                path="/about"
+                component={withLayout(BaseLayout, AboutPage)}
+              />
+              <Route
+                path="/products/:listingId"
+                component={withLayout(BaseLayout, ListingPage)}
+              />
+              <Route
+                path="/chat"
+                component={withLayout(BaseLayout, ChatPage)}
+              />
+              <Route
+                exact
+                path="/products"
+                component={withLayout(BaseLayout, HomePage)}
+              />
+              <Route
+                exact
+                path="/"
+                component={withLayout(BaseLayout, HomePage)}
+              />
+              <Route
+                path="/"
+                component={withLayout(BaseLayout, NotFound404Page, {})}
+              />
+            </Switch>
+          </Suspense>
+        </BrowserRouter>
+      </Provider>
+    </ErrorBoundary>
   );
 };
 
