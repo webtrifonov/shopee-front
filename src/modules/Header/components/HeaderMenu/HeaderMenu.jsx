@@ -15,6 +15,9 @@ export const HeaderMenu = memo(() => {
         <li>
           <Link to={'/chat'}>Chat</Link>
         </li>
+        <li>
+          <Link to={'/order'}>Order</Link>
+        </li>
       </ul>
     </nav>
   );
