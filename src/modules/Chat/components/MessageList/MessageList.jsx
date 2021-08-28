@@ -2,24 +2,29 @@ import React, { memo, useEffect, useState } from 'react';
 import s from './messagesList.module.scss';
 import { MessageItem } from '../MessageItem/MessageItem';
 import socket from '../../../../utils/socket';
+import { useDispatch } from 'react-redux';
 
 export const MessageList = memo(() => {
   const [messageList, setMessageList] = useState([]);
+  const dispatch = useDispatch();
   useEffect(() => {
-    socket.on('GET_MESSAGES', (payload) => {
+    const receiveMessage = (payload) => {
+      console.log('>>> receiveMessage payload = ', payload);
+      // dispatch(receiveMessage(data));
+      setMessageList((prev) => [...prev, payload?.messageData]);
+    };
+    const getMessages = (payload) => {
       setMessageList(payload.messageList);
-    });
-    socket.on('NEW_MESSAGE', (payload) => {
-      console.log('>>> payload = ', payload);
-
-      setMessageList((prev) => [...prev, payload.messageData]);
-    });
+    };
+    socket.on('RECEIVE_MESSAGE', receiveMessage);
+    socket.on('GET_MESSAGES', getMessages);
   }, []);
+  console.log('>>> messageList = ', messageList);
 
   return (
     <div className={s.messageListContainer}>
       {messageList?.length
-        ? messageList.map((item) => <MessageItem key={item.id} item={item} />)
+        ? messageList.map((item) => <MessageItem key={item?.id} item={item} />)
         : null}
     </div>
   );

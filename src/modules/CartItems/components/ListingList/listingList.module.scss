@@ -1,0 +1,8 @@
+.listingList {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-column-gap: 15px;
+}
+.listingListGrid {
+  grid-template-columns: 1fr 1fr;
+}

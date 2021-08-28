@@ -25,6 +25,9 @@ const ChatPage = lazy(() =>
 const OrderPage = lazy(() =>
   import('./pages/Order').then((module) => ({ default: module.OrderPage }))
 );
+const CartPage = lazy(() =>
+  import('./pages/Cart').then((module) => ({ default: module.CartPage }))
+);
 const BaseLayout = lazy(() =>
   import('./layouts/BaseLayout/BaseLayout').then((module) => ({
     default: module.BaseLayout,
@@ -72,6 +75,11 @@ const Root = () => {
                 exact
                 path="/products"
                 component={withLayout(BaseLayout, HomePage)}
+              />
+              <Route
+                exact
+                path="/cart"
+                component={withLayout(BaseLayout, CartPage)}
               />
               <Route
                 path={'/order'}

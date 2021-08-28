@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import s from '../../../modules/Header/components/AuthBar/authBar.module.scss';
-import Title from '../../Title/Title';
+import { Title } from '../../Title/Title';
 import Input from '../../Input/Input';
 import Button from '../../Button/Button';
 import { useDispatch, useSelector } from 'react-redux';

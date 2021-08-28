@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router';
 import { fetchOrdersStart } from '../../store/actions/userActions';
-import Title from '../../components/Title/Title';
+import { Title } from '../../components/Title/Title';
 
 const Orders = () => {
   const dispatch = useDispatch();

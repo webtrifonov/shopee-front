@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Title from '../../Title/Title';
+import { Title } from '../../Title/Title';
 import Input from '../../Input/Input';
 import s from '../../../modules/Header/components/AuthBar/authBar.module.scss';
 import Button from '../../Button/Button';

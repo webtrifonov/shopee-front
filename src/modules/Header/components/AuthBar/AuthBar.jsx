@@ -51,9 +51,9 @@ export const AuthBar = memo(() => {
         </div>
       </div>
       <div className={s.cartButton}>
-        <div>
+        <Link to={'/cart'}>
           <img className={s.cartIcon} src={cartIcon} alt="Cart" />
-        </div>
+        </Link>
       </div>
       {isAuthenticated && (
         <div className={s.cartActions}>

@@ -16,9 +16,7 @@ export const Chat = memo(() => {
   }, []);
   return (
     <div className={s.chat}>
-      <div className={s.participantsWrapper}>
-        <ChatroomUserList />
-      </div>
+      <ChatroomUserList />
       <div className={s.messageListWrapper}>
         <MessageList />
       </div>

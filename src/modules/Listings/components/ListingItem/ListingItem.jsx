@@ -6,27 +6,14 @@ import {
   faDollarSign,
   faShoppingCart,
 } from '@fortawesome/free-solid-svg-icons';
-import { openModal } from '../../../BaseModal/baseModal.actions';
 import Button from '../Button/Button';
 import { Link } from 'react-router-dom';
 
 export const ListingItem = ({
   item: { id, image, title, description, price, amount },
   viewStatus,
+  addToCart,
 }) => {
-  const dispatch = useDispatch();
-  const addToCart = (event) => {
-    console.log(event);
-    dispatch(
-      openModal({
-        Content: {
-          title: 'qwe',
-          message: 'asd',
-        },
-      })
-    );
-  };
-
   return (
     <div className={`${s.productItem} bg-black`}>
       <Link to={`/products/${id}`}>

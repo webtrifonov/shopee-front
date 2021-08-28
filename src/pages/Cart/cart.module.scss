@@ -1,0 +1,15 @@
+.mainContainer {
+	display: grid;
+	grid-template-areas:
+		'title title'
+		'cartitems total'
+	;
+	grid-template-columns: 9fr 3fr;
+	grid-template-rows: auto auto;
+	grid-column-gap: 25px;
+	.total {
+		 grid-area: total;
+	}
+}
+
+

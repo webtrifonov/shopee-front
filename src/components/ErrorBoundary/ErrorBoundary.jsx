@@ -4,7 +4,7 @@ import s from './errorBoundary.module.scss';
 import Logo from '../icons/Logo/Logo';
 import SomethingWentWrongIcon from '../../assets/images/somethingWentWrong.svg';
 import Button from '../Button/Button';
-import Title from '../Title/Title';
+import { Title } from '../Title/Title';
 
 export class ErrorBoundary extends React.Component {
   constructor(props) {

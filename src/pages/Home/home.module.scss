@@ -2,23 +2,30 @@
 	display: grid;
 	grid-template-areas:
 		'breadcrumbs breadcrumbs'
-		'meta meta'
+		'title title'
 		'statusBar statusBar'
-		'filters listings';
+		'filters listings'
+	;
 	grid-template-columns: 4fr 8fr;
 	grid-template-rows: auto auto auto 1fr;
 	grid-column-gap: 25px;
+	
+	.listings {
+		grid-area: listings;
+	}
+	.filters {
+		 grid-area: filters;
+	 }
+	.products,
+  .noProducts {
+	  grid-area: products;
+  }
+	.noProducts {
+	   margin-top: 10px;
+	   color: #fafafa;
+   }
 }
 
-.filters {
-	grid-area: filters;
-	padding: 0 15px;
-}
-.products,
-.noProducts {
-	grid-area: products;
-}
-.noProducts {
-	margin-top: 10px;
-	color: #fafafa;
-}
+
+
+

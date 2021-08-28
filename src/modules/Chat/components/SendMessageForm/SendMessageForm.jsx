@@ -7,6 +7,7 @@ import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { chatSelector } from '../../chat.selector';
 import { changeSetForm, sendMessage } from '../../chat.actions';
+import socket from '../../../../utils/socket';
 
 export const SendMessageForm = memo(() => {
   const dispatch = useDispatch();
@@ -31,13 +32,13 @@ export const SendMessageForm = memo(() => {
   };
   const onSendHandler = (event) => {
     event.preventDefault();
-    console.log('>>> sendForm.massage = ', sendForm.message);
+    console.log('>>> sendForm = ', sendForm);
 
     if (sendForm.message) {
-      // socket.emit('SEND_MESSAGE', {
-      //   ...sendForm,
-      // });
-      dispatch(sendMessage(sendForm));
+      socket.emit('SEND_MESSAGE', {
+        ...sendForm,
+      });
+      // dispatch(sendMessage(sendForm));
       dispatch(
         changeSetForm({
           message: '',

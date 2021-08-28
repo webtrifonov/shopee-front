@@ -1,0 +1,22 @@
+.button {
+  display: inline-flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 15px;
+  border-radius: 20px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  user-select: none;
+  appearance: unset;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  &:active {
+    border: none;
+    outline: none;
+  }
+}
+.mlIcon {
+  margin-left: 5px;
+}

@@ -6,6 +6,7 @@ import { ListingItem } from '../ListingItem/ListingItem';
 import Loader from '../Loader/Loader';
 import classNames from 'classnames';
 import { getListingsRequest } from '../../listings.actions';
+import { openModal } from '../../../BaseModal';
 
 export const ListingList = () => {
   const dispatch = useDispatch();
@@ -28,6 +29,17 @@ export const ListingList = () => {
     );
   }, [dispatch, orderType, orderValue, currentPage]);
 
+  const addToCart = (event) => {
+    console.log(event);
+    dispatch(
+      openModal({
+        Content: {
+          title: 'qwe',
+          message: 'asd',
+        },
+      })
+    );
+  };
   return (
     <div
       className={classNames(
@@ -39,7 +51,12 @@ export const ListingList = () => {
       {!!listings?.length
         ? listings.map((item) => {
             return (
-              <ListingItem key={item.id} item={item} viewStatus={viewStatus} />
+              <ListingItem
+                key={item.id}
+                item={item}
+                viewStatus={viewStatus}
+                addToCart={addToCart}
+              />
             );
           })
         : null}

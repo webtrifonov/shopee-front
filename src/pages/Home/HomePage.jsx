@@ -10,8 +10,12 @@ export const HomePage = () => {
     <div className={s.mainContainer}>
       <Title>All products</Title>
       <ListingsStatusBar />
-      <ListingsFiltersBar />
-      <Listings />
+      <div className={s.filters}>
+        <ListingsFiltersBar />
+      </div>
+      <div className={s.listings}>
+        <Listings />
+      </div>
     </div>
   );
 };
