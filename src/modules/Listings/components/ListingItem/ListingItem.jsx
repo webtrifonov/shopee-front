@@ -1,5 +1,4 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import s from './listingItem.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {

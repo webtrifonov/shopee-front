@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { STORAGE_TOKEN } from './constants';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAuthUserStart } from '../store/actions/authActions';
-import { Redirect } from 'react-router';
+import { Navigate } from 'react-router-dom';
 
 const withLayout = (Layout, Component, options = {}) => {
   const isPageForAuthUser = Boolean(options?.auth);
@@ -23,7 +23,7 @@ const withLayout = (Layout, Component, options = {}) => {
         <Component />
       </Layout>
     ) : (
-      <Redirect
+      <Navigate
         to={{
           path: '/',
         }}

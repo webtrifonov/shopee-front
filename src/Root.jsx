@@ -1,14 +1,14 @@
 import React, { lazy, Suspense } from 'react';
 import { Provider } from 'react-redux';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import store from './store/store';
 import './assets/css/main.scss';
 import './assets/css/media.scss';
 import Loader from './components/icons/Loader/Loader';
-import withLayout from './utils/hocs';
 import { BaseModal } from './modules/BaseModal';
 import { Tooltip } from './modules/Tooltip';
 import { ErrorBoundary } from './components/ErrorBoundary/ErrorBoundary';
+import { PrivateRoutes } from './PrivateRoutes';
 
 const HomePage = lazy(() =>
   import('./pages/Home').then((module) => ({ default: module.HomePage }))
@@ -50,51 +50,27 @@ const Root = () => {
         <Tooltip />
         <BrowserRouter>
           <Suspense fallback={<Loader global />}>
-            <Switch>
-              <Route
-                path="/wishlist"
-                component={withLayout(BaseLayout, WishList, { auth: true })}
-              />
-              <Route
-                path="/orders"
-                component={withLayout(BaseLayout, Orders, { auth: true })}
-              />
-              <Route
-                path="/about"
-                component={withLayout(BaseLayout, AboutPage)}
-              />
-              <Route
-                path="/products/:listingId"
-                component={withLayout(BaseLayout, ListingPage)}
-              />
-              <Route
-                path="/chat"
-                component={withLayout(BaseLayout, ChatPage)}
-              />
-              <Route
-                exact
-                path="/products"
-                component={withLayout(BaseLayout, HomePage)}
-              />
-              <Route
-                exact
-                path="/cart"
-                component={withLayout(BaseLayout, CartPage)}
-              />
-              <Route
-                path={'/order'}
-                component={withLayout(BaseLayout, OrderPage, {})}
-              />
-              <Route
-                exact
-                path="/"
-                component={withLayout(BaseLayout, HomePage)}
-              />
-              <Route
-                path="/"
-                component={withLayout(BaseLayout, NotFound404Page, {})}
-              />
-            </Switch>
+            <Routes>
+              <Route element={<BaseLayout />}>
+                <Route exact path="/" element={<HomePage />} />
+                <Route exact path="/cart" element={<CartPage />} />
+                <Route exact path="/wishlist" element={<WishList />} />
+                <Route exact path="/orders" element={<Orders />} />
+                <Route exact path="/about" element={<AboutPage />} />
+                <Route
+                  exact
+                  path="/products/:listingId"
+                  element={<ListingPage />}
+                />
+                <Route exact path="/chat" element={<ChatPage />} />
+                <Route exact path="/products" element={<HomePage />} />
+                <Route exact path="/" element={<NotFound404Page />} />
+
+                <Route element={<PrivateRoutes />}>
+                  <Route exact path={'/order'} element={<OrderPage />} />
+                </Route>
+              </Route>
+            </Routes>
           </Suspense>
         </BrowserRouter>
       </Provider>

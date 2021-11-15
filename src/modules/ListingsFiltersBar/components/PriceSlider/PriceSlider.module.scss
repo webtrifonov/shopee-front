@@ -1,4 +1,7 @@
+@use 'sass:math';
+
 $cornerSize: 12px;
+
 .priceSliderContainer {
   width: 100%;
   display: flex;
@@ -29,7 +32,7 @@ $cornerSize: 12px;
   position: absolute;
   width: $cornerSize;
   height: $cornerSize;
-  margin-left: -$cornerSize / 2;
+  margin-left: math.div(-$cornerSize, 2);
   border-radius: 5px;
   background: #191919;
   z-index: 2;

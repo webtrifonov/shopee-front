@@ -1,7 +1,7 @@
 import React, { memo, useState } from 'react';
 import s from './searchForm.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
   changeSearchActiveItemDecrement,
   changeSearchActiveItemIncrement,
@@ -15,9 +15,8 @@ import { searchFormSelector } from './searchForm.selector';
 
 export const SearchForm = memo(() => {
   const dispatch = useDispatch();
-  const { searchField, searchResults, searchActiveItem } = useSelector(
-    searchFormSelector
-  );
+  const { searchField, searchResults, searchActiveItem } =
+    useSelector(searchFormSelector);
 
   const [searchListVisible, setSearchListVisible] = useState(false);
 
@@ -44,7 +43,7 @@ export const SearchForm = memo(() => {
       searchHandler(e);
     }
   };
-  const history = useHistory();
+  const history = useNavigate();
 
   const onChangeSearch = (event) => {
     event.preventDefault();

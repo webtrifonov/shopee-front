@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect } from 'react-router';
+import { Navigate } from 'react-router-dom';
 import { fetchOrdersStart } from '../../store/actions/userActions';
 import { Title } from '../../components/Title/Title';
 
@@ -25,7 +25,7 @@ const Orders = () => {
       ))}
     </div>
   ) : (
-    <Redirect
+    <Navigate
       to={{
         pathname: '/',
       }}
