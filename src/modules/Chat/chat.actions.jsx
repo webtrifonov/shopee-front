@@ -13,21 +13,3 @@ export const sendMessage = (payload) => {
     payload,
   };
 };
-export const getChatroomUserListRequest = (payload) => {
-  return {
-    type: GET_CHATROOM_USER_LIST.REQUEST,
-    payload,
-  };
-};
-export const getChatroomUserListSuccess = (payload) => {
-  return {
-    type: GET_CHATROOM_USER_LIST.SUCCESS,
-    payload,
-  };
-};
-export const getChatroomUserListFailure = (payload) => {
-  return {
-    type: GET_CHATROOM_USER_LIST.FAILURE,
-    payload,
-  };
-};

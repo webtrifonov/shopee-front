@@ -5,10 +5,10 @@ import classNames from 'classnames';
 export const Textarea = memo((props) => {
   const { name, children, errors, className, ...rest } = props;
   return (
-    <>
+    <div className={s.textAreaContainer}>
       <textarea
         name={name}
-        className={classNames(s.input, className)}
+        className={classNames(s.textArea, className)}
         {...rest}
       >
         {children}
@@ -19,6 +19,6 @@ export const Textarea = memo((props) => {
             {item}
           </span>
         ))}
-    </>
+    </div>
   );
 });

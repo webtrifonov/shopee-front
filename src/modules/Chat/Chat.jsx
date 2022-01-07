@@ -17,12 +17,9 @@ export const Chat = memo(() => {
   return (
     <div className={s.chat}>
       <ChatroomUserList />
-      <div className={s.messageListWrapper}>
-        <MessageList />
-      </div>
-      <div className={s.sendMessageFormWrapper}>
-        <SendMessageForm />
-      </div>
+      <MessageList />
+      <SendMessageForm />
     </div>
   );
 });
+Chat.displayName = 'Chat';

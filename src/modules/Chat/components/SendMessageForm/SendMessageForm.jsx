@@ -3,10 +3,10 @@ import s from './sendMessageForm.module.scss';
 import Input from '../Input/Input';
 import { Textarea } from '../Textarea/TextArea';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import { faPaperclip, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { chatSelector } from '../../chat.selector';
-import { changeSetForm, sendMessage } from '../../chat.actions';
+import { changeSetForm } from '../../chat.actions';
 import socket from '../../../../utils/socket';
 
 export const SendMessageForm = memo(() => {
@@ -32,7 +32,6 @@ export const SendMessageForm = memo(() => {
   };
   const onSendHandler = (event) => {
     event.preventDefault();
-    console.log('>>> sendForm = ', sendForm);
 
     if (sendForm.message) {
       socket.emit('SEND_MESSAGE', {
@@ -46,41 +45,50 @@ export const SendMessageForm = memo(() => {
       );
     }
   };
-  console.log('>>> authUser  = ', authUser);
 
   return (
-    <>
+    <div className={s.sendMessageFormContainer}>
       {/*<Write author={sendForm.name} />*/}
-      <form className={s.sendMessageForm} onSubmit={onSendHandler}>
-        <div className={s.nameField}>
-          <Input
-            type="text"
-            className={s.name}
-            placeholder="Enter your name"
-            name="name"
-            value={sendForm.name}
-            onChange={onChangeValue}
-          />
-        </div>
-        <div className={s.messageField}>
-          <Textarea
-            className={s.message}
-            name="message"
-            placeholder="Enter your message"
-            value={sendForm.message}
-            onChange={onChangeValue}
-          />
-        </div>
-        <div className={s.actions}>
-          <button className={s.sendMessageButton}>
-            <FontAwesomeIcon
-              className={s.sendMessage}
-              size={'lg'}
-              icon={faPaperPlane}
+      <form onSubmit={onSendHandler}>
+        <div className={s.sendMessageForm}>
+          <div className={s.nameField}>
+            <Input
+              type="text"
+              className={s.name}
+              placeholder="Enter your name"
+              name="name"
+              value={sendForm.name}
+              onChange={onChangeValue}
             />
-          </button>
+          </div>
+          <div className={s.messageField}>
+            <Textarea
+              className={s.message}
+              name="message"
+              placeholder="Enter your message"
+              value={sendForm.message}
+              onChange={onChangeValue}
+              rows={4}
+            />
+          </div>
+          <div className={s.actions}>
+            <button className={s.sendMessageButton}>
+              <FontAwesomeIcon
+                className={s.sendMessage}
+                size={'lg'}
+                icon={faPaperPlane}
+              />
+            </button>
+            <button className={s.sendMessageButton}>
+              <FontAwesomeIcon
+                className={s.sendMessage}
+                size={'lg'}
+                icon={faPaperclip}
+              />
+            </button>
+          </div>
         </div>
       </form>
-    </>
+    </div>
   );
 });

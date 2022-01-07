@@ -8,6 +8,7 @@ import { baseModalSelector } from './baseModal.selector';
 let BaseModal = () => {
   const { visible, Content, onClose } = useSelector(baseModalSelector);
   const dispatch = useDispatch();
+
   const onCloseHandler = (event) => {
     event.preventDefault();
     onClose && onClose();

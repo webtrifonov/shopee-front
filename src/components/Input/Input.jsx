@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import s from './Input.module.scss';
+import s from './input.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import classNames from 'classnames';

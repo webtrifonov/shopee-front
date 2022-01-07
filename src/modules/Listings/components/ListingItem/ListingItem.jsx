@@ -12,6 +12,7 @@ export const ListingItem = ({
   item: { id, image, title, description, price, amount },
   viewStatus,
   addToCart,
+  buyNow,
 }) => {
   return (
     <div className={`${s.productItem} bg-black`}>
@@ -43,6 +44,7 @@ export const ListingItem = ({
           className={s.buyNow}
           color={'#2A9A38'}
           Icon={() => <FontAwesomeIcon color={'#fafafa'} icon={faDollarSign} />}
+          onClick={buyNow}
         >
           Buy now!!!
         </Button>

@@ -1,12 +1,11 @@
 import { all, takeEvery } from '@redux-saga/core/effects';
 
-export const reducerGenerator = (initialState, handlers) => (
-  state = initialState,
-  { type, payload }
-) => {
-  const handler = handlers[type];
-  return handler ? handler(state, payload) : state;
-};
+export const reducerGenerator =
+  (initialState, handlers) =>
+  (state = initialState, { type, payload }) => {
+    const handler = handlers[type];
+    return handler ? handler(state, payload) : state;
+  };
 
 export const sagaGenerator = (handlers) =>
   function* sagaReducer() {
@@ -30,7 +29,6 @@ export const createActions = (actionTypes) => {
     });
     return acc;
   }, {});
-  console.log('>>> actions   = ', actions);
 
   return actions;
 };

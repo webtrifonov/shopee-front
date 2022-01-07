@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import s from './listingList.module.scss';
 import { listingsSelector } from '../../listings.selector';
@@ -7,9 +7,11 @@ import Loader from '../Loader/Loader';
 import classNames from 'classnames';
 import { getListingsRequest } from '../../listings.actions';
 import { openModal } from '../../../BaseModal';
+import { DefaultModal } from '../../../DefaultModal';
 
 export const ListingList = () => {
   const dispatch = useDispatch();
+
   const {
     loadingListings,
     listings,
@@ -19,6 +21,8 @@ export const ListingList = () => {
     orderValue,
   } = useSelector(listingsSelector);
 
+  const [visible, setVisible] = useState(false);
+  const [currentListingId, setCurrentListingId] = useState(null);
   useEffect(() => {
     dispatch(
       getListingsRequest({
@@ -40,6 +44,11 @@ export const ListingList = () => {
       })
     );
   };
+  const buyNow = (id) => (event) => {
+    setCurrentListingId(id);
+    setVisible(true);
+  };
+
   return (
     <div
       className={classNames(
@@ -56,10 +65,18 @@ export const ListingList = () => {
                 item={item}
                 viewStatus={viewStatus}
                 addToCart={addToCart}
+                buyNow={buyNow(item.id)}
               />
             );
           })
         : null}
+      <DefaultModal
+        visible={visible}
+        setVisible={setVisible}
+        title={listings.find((item) => item.id === currentListingId)?.id}
+        message={listings.find((item) => item.id === currentListingId)?.title}
+        // children={<h1 style={{ color: '#FFF' }}>content</h1>}
+      />
     </div>
   );
 };

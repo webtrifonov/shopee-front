@@ -1,3 +1,7 @@
+
+.sendMessageFormContainer {
+	grid-area: sendMessageForm;
+}
 .sendMessageForm {
 	display: grid;
 	grid-template-areas:
@@ -5,28 +9,30 @@
 		'message actions'
 	;
 	grid-template-columns: 1fr auto;
+	grid-gap: 10px;
 	.nameField {
 		grid-area: name;
 	}
 	.name {
-		width: -webkit-fill-available;
+		border-radius: 9px;
 	}
 	.messageField {
 		grid-area: message;
-		margin-top: 5px;
 	}
 	.message {
-		width: -webkit-fill-available;
+		width: 100%;
+		border-radius: 9px;
+		resize: none;
 	}
 	.actions {
-		max-width: 50px;
 		grid-area: actions;
-		padding: 0 5px;
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
 	}
-	.sendMessageButton{
-		margin: 0px 3px;
-		width: 50px;
-		height: 50px;
+	.sendMessageButton {
+		width: 55px;
+		height: 55px;
 		border: none;
 		outline: none;
 		border-radius: 9px;

@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './DefaultCentralModal.module.scss';
 
-const CentralModal = ({ title, message }) => {
+const DefaultCentralModal = ({ title, message }) => {
   return (
     <div className={s.content}>
       {title && <div className={s.title}>{title}</div>}
@@ -10,4 +10,4 @@ const CentralModal = ({ title, message }) => {
   );
 };
 
-export default CentralModal;
+export default DefaultCentralModal;

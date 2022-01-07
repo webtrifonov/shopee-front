@@ -9,7 +9,6 @@ export const MessageList = memo(() => {
   const dispatch = useDispatch();
   useEffect(() => {
     const receiveMessage = (payload) => {
-      console.log('>>> receiveMessage payload = ', payload);
       // dispatch(receiveMessage(data));
       setMessageList((prev) => [...prev, payload?.messageData]);
     };
@@ -19,7 +18,6 @@ export const MessageList = memo(() => {
     socket.on('RECEIVE_MESSAGE', receiveMessage);
     socket.on('GET_MESSAGES', getMessages);
   }, []);
-  console.log('>>> messageList = ', messageList);
 
   return (
     <div className={s.messageListContainer}>
