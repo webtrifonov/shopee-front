@@ -8,6 +8,7 @@ import classNames from 'classnames';
 import { getListingsRequest } from '../../listings.actions';
 import { openModal } from '../../../BaseModal';
 import { DefaultModal } from '../../../DefaultModal';
+import { AlertMessage } from '../AlertMessage/AlertMessage';
 
 export const ListingList = () => {
   const dispatch = useDispatch();
@@ -15,6 +16,7 @@ export const ListingList = () => {
   const {
     loadingListings,
     listings,
+    errorListings,
     currentPage,
     viewStatus,
     orderType,
@@ -23,6 +25,7 @@ export const ListingList = () => {
 
   const [visible, setVisible] = useState(false);
   const [currentListingId, setCurrentListingId] = useState(null);
+
   useEffect(() => {
     dispatch(
       getListingsRequest({
@@ -49,6 +52,27 @@ export const ListingList = () => {
     setVisible(true);
   };
 
+  const renderList = () => {
+    if (loadingListings) {
+      return (<Loader />)
+    } else if (errorListings) {
+      return <AlertMessage type="error">{errorListings}</AlertMessage>
+    } else if (!listings.length) {
+      return <AlertMessage>No records</AlertMessage>
+    } else {
+      return listings.map((item) => {
+        return (
+          <ListingItem
+            key={item.id}
+            item={item}
+            viewStatus={viewStatus}
+            addToCart={addToCart}
+            buyNow={buyNow(item.id)}
+          />
+        );
+      })
+    }
+  }
   return (
     <div
       className={classNames(
@@ -56,20 +80,9 @@ export const ListingList = () => {
         viewStatus === 'grid' && s.listingListGrid
       )}
     >
-      {loadingListings && <Loader />}
-      {!!listings?.length
-        ? listings.map((item) => {
-            return (
-              <ListingItem
-                key={item.id}
-                item={item}
-                viewStatus={viewStatus}
-                addToCart={addToCart}
-                buyNow={buyNow(item.id)}
-              />
-            );
-          })
-        : null}
+      <div className={s.list}>
+        {renderList()}
+      </div>
       <DefaultModal
         visible={visible}
         setVisible={setVisible}

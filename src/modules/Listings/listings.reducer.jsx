@@ -1,11 +1,24 @@
 import { reducerGenerator } from '../../utils/store';
 import { LISTINGS, SET } from './listings.constants';
 
+const initialState = {
+  loadingListings: false,
+  listings: [],
+  errorListings: '',
+  listingsCount: 0,
+  currentPage: 1,
+  // for export
+  viewStatus: 'list', // list | grid
+  orderType: 'createdAt',
+  orderValue: 'ASC', // ASC | DESC,
+};
 const HANDLERS = {
   [LISTINGS.REQUEST]: (state) => {
     return {
       ...state,
       loadingListings: true,
+      listings: initialState.listings,
+      errorListings: initialState.errorListings,
     };
   },
   [LISTINGS.SUCCESS]: (state, { listings, listingsCount }) => {
@@ -44,15 +57,5 @@ const HANDLERS = {
     };
   },
 };
-const initialState = {
-  listings: [],
-  listingsCount: 0,
-  loadingListings: false,
-  errorListings: '',
-  currentPage: 1,
-  // for export
-  viewStatus: 'list', // list | grid
-  orderType: 'createdAt',
-  orderValue: 'ASC', // ASC | DESC,
-};
+
 export const listings = reducerGenerator(initialState, HANDLERS);

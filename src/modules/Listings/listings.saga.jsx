@@ -23,9 +23,13 @@ const HANDLERS = {
         yield put(
           getListingsSuccess({ listings: products, listingsCount: count })
         );
+      } else {
+        throw new Error('Error load list');
       }
     } catch (error) {
-      yield put(getListingsFailure(error.message));
+      if (error instanceof Error) {
+        yield put(getListingsFailure({ error: error.message }));
+      }
     }
   },
 };

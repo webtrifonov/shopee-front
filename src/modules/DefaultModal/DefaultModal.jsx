@@ -26,3 +26,4 @@ export const DefaultModal = memo((props) => {
     </Portal>
   ) : null;
 });
+DefaultModal.displayName = 'DefaultModal';

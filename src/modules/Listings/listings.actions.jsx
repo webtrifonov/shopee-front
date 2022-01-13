@@ -12,10 +12,10 @@ export const getListingsSuccess = (payload) => {
     payload,
   };
 };
-export const getListingsFailure = (error) => {
+export const getListingsFailure = (payload) => {
   return {
     type: LISTINGS.FAILURE,
-    payload: error,
+    payload,
   };
 };
 export const changePage = (payload) => {

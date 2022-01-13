@@ -1,14 +1,14 @@
 import { reducerGenerator } from '../../utils/store';
-import { LISTINGS, SET } from './listings.constants';
+import { CART_ITEMS, SET } from './listings.constants';
 
 const HANDLERS = {
-  [LISTINGS.REQUEST]: (state) => {
+  [CART_ITEMS.REQUEST]: (state) => {
     return {
       ...state,
       loadingListings: true,
     };
   },
-  [LISTINGS.SUCCESS]: (state, { listings, listingsCount }) => {
+  [CART_ITEMS.SUCCESS]: (state, { listings, listingsCount }) => {
     return {
       ...state,
       loadingListings: false,
@@ -16,7 +16,7 @@ const HANDLERS = {
       listingsCount,
     };
   },
-  [LISTINGS.FAILURE]: (state, payload) => {
+  [CART_ITEMS.FAILURE]: (state, payload) => {
     return {
       ...state,
       loadingListings: false,

@@ -7,7 +7,6 @@ export const Listings = () => {
   return (
     <div className={s.listings}>
       <ListingList />
-
       <div className={s.pagination}>
         <Pagination />
       </div>

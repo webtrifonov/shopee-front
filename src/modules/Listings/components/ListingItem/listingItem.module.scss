@@ -1,9 +1,13 @@
 .productItem {
-  margin-top: 10px;
   border-radius: 9px;
   display: flex;
   padding: 15px;
   //width: 100%;
+}
+.productItem {
+  &:not(:first-child) {
+    margin-top: 10px;
+  }
 }
 .imageNodata {
   &:before {

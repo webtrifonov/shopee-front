@@ -1,20 +1,20 @@
-import { LISTINGS, SET } from './listings.constants';
+import { CART_ITEMS, SET } from './listings.constants';
 
 export const getListingsRequest = (payload) => {
   return {
-    type: LISTINGS.REQUEST,
+    type: CART_ITEMS.REQUEST,
     payload,
   };
 };
 export const getListingsSuccess = (payload) => {
   return {
-    type: LISTINGS.SUCCESS,
+    type: CART_ITEMS.SUCCESS,
     payload,
   };
 };
 export const getListingsFailure = (error) => {
   return {
-    type: LISTINGS.FAILURE,
+    type: CART_ITEMS.FAILURE,
     payload: error,
   };
 };

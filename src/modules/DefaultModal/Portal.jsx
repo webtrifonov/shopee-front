@@ -9,11 +9,17 @@ class Portal extends Component {
   }
 
   componentDidMount() {
-    this.rootEl.appendChild(this.el);
+    const { el, rootEl } = this.state;
+    if (rootEl) {
+      rootEl.appendChild(el);
+    }
   }
 
   componentWillUnmount() {
-    this.rootEl.removeChild(this.el);
+    const { el, rootEl } = this.state;
+    if (rootEl) {
+      rootEl.removeChild(el);
+    }
   }
 
   render() {
